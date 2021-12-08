@@ -25,6 +25,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Genres" asp-action="Index">Genres</a>
                         </li>
+                        <li>
+                            <form asp-controller="Books" asp-action="SearchByKeyword">
+                                <label name="keyword" class="control-label"></label>
+                                <input name="keyword" class="form-control" />
+                                <input type="submit" value="Search" class="btn btn-primary" />
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>

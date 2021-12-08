@@ -156,5 +156,24 @@ namespace FinalProject.Controllers
         {
             return _context.Books.Any(e => e.Id == id);
         }
+
+
+        //GET: Books/SearchByKeyword/String
+        public async Task<IActionResult> SearchByKeyword(string keyword)
+        {
+            var books = await _context.Books.Include(b => b.Genre)
+                .Where(b => b.Author.Contains(keyword) || b.Title.Contains(keyword) || b.Genre.Name.Contains(keyword)).ToListAsync();
+
+            var viewModel = new SearchByKeywordViewModel()
+            {
+                Books = books,
+                SearchKeyword = keyword
+            };
+
+            return View(viewModel);
+
+        }
+
+
     }
 }
