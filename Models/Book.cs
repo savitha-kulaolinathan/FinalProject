@@ -19,14 +19,30 @@ namespace FinalProject.Models
         [Required]
         [StringLength(255)]
         public string Author { get; set; }
-        
-        [Display(Name = "Number In Stock")]
-        public int NumberInStock { get; set; }
+
+        public DateTime? DueDate { get; set; }
+
+        public string Status { get; set; }
+
+        public enum EStatus
+        {
+            [Display(Name="On Shelf")]
+            OnShelf = 0,
+            [Display(Name="Checked Out")]
+            CheckedOut = 1
+        }
 
         [ForeignKey("GenreId")]
         public virtual Genre Genre { get; set; }
 
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
+
+        public Book()
+        {
+            DueDate = null;
+        }
     }
+
+    
 }
