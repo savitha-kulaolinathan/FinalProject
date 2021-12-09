@@ -20,7 +20,7 @@
                 @Html.DisplayNameFor(model => model.Author)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NumberInStock)
+                @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Genre)
@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumberInStock)
+                @Enum.Parse(typeof(Book.EStatus), item.Status)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Genre.Name)

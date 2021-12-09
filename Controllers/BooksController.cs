@@ -57,7 +57,7 @@ namespace FinalProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Author,NumberInStock,GenreId")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,Title,Author,Status,GenreId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace FinalProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,NumberInStock,GenreId")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,Status,GenreId")] Book book)
         {
             if (id != book.Id)
             {
