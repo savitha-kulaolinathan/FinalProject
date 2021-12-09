@@ -20,8 +20,9 @@ namespace FinalProject.Models
         [StringLength(255)]
         public string Author { get; set; }
 
-        public DateTime? DueDate { get; set; }
+        public DateTime? CheckOutDate { get; set; }
 
+        [Required]
         public string Status { get; set; }
 
         public enum EStatus
@@ -40,7 +41,7 @@ namespace FinalProject.Models
 
         public Book()
         {
-            DueDate = null;
+            CheckOutDate = null;
         }
     }
 
