@@ -1,9 +1,10 @@
-﻿@model IEnumerable<FinalProject.Models.Book>
+﻿@model IEnumerable<Book>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 @if (User.IsInRole("Admin"))
 {
@@ -14,3 +15,4 @@ else
 {
     <partial name="_BookUserView" />
 }
+
