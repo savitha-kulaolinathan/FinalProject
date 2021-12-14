@@ -2,7 +2,7 @@
 
 
 
-<div class="card flex-row" style="width: 18rem;">
+@*<div class="card flex-row" style="width: 18rem;">
     @foreach (var item in Model)
     {
 
@@ -13,19 +13,8 @@
         </div>
 
     }
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    @*<h1>This is a List view of the books</h1>
+</div>*@
+    <h1>This is a List view of the books</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -35,9 +24,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Author)
                     </th>
+                    @if (User.Identity.IsAuthenticated)
+                    {
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
+                    }
                     <th>
                         @Html.DisplayNameFor(model => model.Genre)
                     </th>
@@ -54,18 +46,25 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Author)
                     </td>
-                    <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td>
 
-                        @Enum.Parse(typeof(Book.EStatus), item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Genre.Name)
-                    </td>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    </td>
-                </tr>
+                            <input type="button" id="checkout" class="btn btn-primary text-white"
+                                   onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+
+                            @*@Enum.Parse(typeof(Book.EStatus), item.Status)*@
+                            
+                        </td>
+                    }
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genre.Name)
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        </td>
+                    </tr>
                 }
             </tbody>
-        </table>*@
+        </table>
 
