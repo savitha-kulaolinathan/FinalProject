@@ -10,14 +10,18 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+
             <div class="container"  style="background-color:Grey">
                
+
+
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
-                    
+
                     <ul class="navbar-nav flex-grow-1">
                         <a  class="nav-link text-white font-weight-bold " asp-area="" asp-controller="Home" asp-action="Index">FinalProject</a>
 
@@ -30,7 +34,11 @@
                     </ul>
                     <form asp-controller="Books" asp-action="SearchByKeyword" class="d-flex">
                         <input class="form-control p-2 me-2 m-2" name="keyword" type="search" placeholder="Search by Keyword" aria-label="Search">
-                        <button class="btn btn-outline-success text-white me-2 m-2" style="background-color:black" type="submit">Search</button>                  
+
+                                 
+
+                        <button class="btn btn-success  me-2 m-2" style="background-color:black" type="submit"><i class="fas fa-search"></i></button>
+
                     </form>
 
 
@@ -47,7 +55,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-light">
         <div class="container">
             &copy; 2021 - FinalProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
@@ -55,6 +63,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/6b331c436e.js" crossorigin="anonymous"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
