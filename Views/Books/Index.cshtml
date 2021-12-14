@@ -6,10 +6,12 @@
 }
 
 
+
 @if (User.IsInRole("Admin"))
 {
    
     <partial name="_BookAdminView" />
+
 }
 else
 {
