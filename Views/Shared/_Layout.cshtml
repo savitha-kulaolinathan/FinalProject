@@ -10,7 +10,11 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
-            <div class="container">
+
+            <div class="container"  style="background-color:Grey">
+               
+
+
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +23,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
 
                     <ul class="navbar-nav flex-grow-1">
+
                         @if (User.IsInRole("Admin"))
                         {
                             <a class="navbar-brand font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">FinalProject</a>
@@ -40,10 +45,15 @@
                             </li>
 
                         }
+
                     </ul>
                     <form asp-controller="Books" asp-action="SearchByKeyword" class="d-flex">
                         <input class="form-control p-2 me-2 m-2" name="keyword" type="search" placeholder="Search by Keyword" aria-label="Search">
-                        <button class="btn btn-outline-success  me-2 m-2" type="submit"><i class="fas fa-search"></i></button>
+
+                                 
+
+                        <button class="btn btn-success  me-2 m-2" style="background-color:black" type="submit"><i class="fas fa-search"></i></button>
+
                     </form>
 
 
