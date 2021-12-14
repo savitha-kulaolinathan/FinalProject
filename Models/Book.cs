@@ -22,6 +22,8 @@ namespace FinalProject.Models
 
         public DateTime? CheckOutDate { get; set; }
 
+        public DateTime? DueDate { get; set; }
+
         [Required]
         public string Status { get; set; }
 
