@@ -1,48 +1,66 @@
 ﻿@model IEnumerable<FinalProject.Models.Book>
 
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Enum.Parse(typeof(Book.EStatus), item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre.Name)
-                </td>
-                <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-info">List of Books</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-area="" asp-controller="Books" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp;Create new  book</a>
+        </div>
+    </div>
+
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Genre)
+                    </th>
+                    <th>
+                        Modigy
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td width="20%">@item.Title</td>
+                        <td width="20%">@item.Author</td>
+                        <td width="20%">
+                            @Enum.Parse(typeof(Book.EStatus), item.Status)
+                        </td>
+                        <td width="20%">
+                            @Html.DisplayFor(modelItem => item.Genre.Name)
+                        </td>
+                        <partial name="_TableButtonPartialView" model="item.Id" />
+
+                    </tr>
+}
+            </tbody>
+        </table> }
+    else
+    {
+        <p> No book created yet</p>}
+</div>
+
