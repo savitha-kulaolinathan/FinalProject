@@ -40,7 +40,7 @@ namespace FinalProject.Models
 
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
-
+        public string UserId { get; set; }
         public Book()
         {
             CheckOutDate = null;
