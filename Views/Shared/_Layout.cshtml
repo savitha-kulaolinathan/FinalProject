@@ -12,7 +12,9 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
 
-            <div class="container" style="background-color:Grey">
+
+            <div class="container"  style="background-color:black">
+               
 
 
 
@@ -25,6 +27,7 @@
                     <img src="/Images/books.png" width="50" height="50" />
 
                     <ul class="navbar-nav flex-grow-1">
+
 
                         @if (User.IsInRole("Admin"))
                         {
@@ -51,13 +54,15 @@
 
                             }
 
+
                         </ul>
+
                     <form asp-controller="Books" asp-action="SearchByKeyword" class="d-flex">
                         <input class="form-control p-2 me-2 m-2" name="keyword" type="search" placeholder="Search by Keyword" aria-label="Search">
 
 
 
-                        <button class="btn btn-success  me-2 m-2" style="background-color:black" type="submit"><i class="fas fa-search"></i></button>
+                        <button class="btn btn-danger me-2 m-2 " style="background-color:black " type="submit"><i class="fas fa-search"></i></button>
 
                     </form>
 
