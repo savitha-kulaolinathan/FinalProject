@@ -18,3 +18,25 @@ else
     <partial name="_BookUserView" />
 }
 
+@section Scripts{ 
+
+    <script type="text/javascript">
+    function checkOut(id) {
+        var checkInurl = '@Url.Action("CheckIn", "Users")';
+        var indexUrl = '@Url.Action("Index", "Books")';
+        checkInurl = checkInurl + '/?id=' + id;
+        $.ajax({
+            url: checkInurl,
+            type: 'GET',
+            success: function (response) {
+                alert(response);
+                window.location.href = indexUrl;
+            },
+            error: function () {
+
+            }
+        })
+    }
+
+    </script>
+}

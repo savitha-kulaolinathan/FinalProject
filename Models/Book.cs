@@ -22,6 +22,8 @@ namespace FinalProject.Models
 
         public DateTime? CheckOutDate { get; set; }
 
+        public DateTime? DueDate { get; set; }
+
         [Required]
         public string Status { get; set; }
 
@@ -38,7 +40,7 @@ namespace FinalProject.Models
 
         [Display(Name = "Genre")]
         public int GenreId { get; set; }
-
+        public string UserId { get; set; }
         public Book()
         {
             CheckOutDate = null;
