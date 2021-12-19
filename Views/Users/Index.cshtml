@@ -7,14 +7,17 @@
 
 
 
+
+
 @if (User.IsInRole("Admin"))
 {
-   
+
     <partial name="_BookAdminView" />
 
 }
 else
 {
+    
     <partial name="_BookUserView" />
 }
 

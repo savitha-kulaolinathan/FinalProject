@@ -31,7 +31,7 @@ namespace FinalProject.Controllers
         {
             var book = await _context.Books.FindAsync(id);
             var user = await _userManager.GetUserAsync(User);
-            //var email = user.Email;
+            var email = user.Email;
             var userId = user.Id;
             
             book.DueDate = (DateTime.Now).AddDays(14);

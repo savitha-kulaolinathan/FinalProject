@@ -21,28 +21,16 @@ namespace FinalProject.Service
             return Excute(options.SendGridKey, subject, message, email);
         }
 
-        private Task Excute(string sendGridKey, string subject, string message, string email)
+        private async Task Excute(string sendGridKey, string subject, string message, string email)
         {
+           
             var client = new SendGridClient(sendGridKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("ss@bp.com", "book"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-
-            };
-            msg.AddTo(new EmailAddress(email));
-            try
-            {
-                return client.SendEmailAsync(msg);
-
-            }
-            catch(Exception)
-            {
-
-            }
-            return null;
+            var from = new EmailAddress("kavithaa434@gmail.com", "Example User");
+            var to = new EmailAddress(email, "Example User");
+            var plainTextContent = message;
+            var htmlContent = "<strong>" + message + "</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
         }
     }
 }
