@@ -14,9 +14,9 @@ a {
   
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #FF0000;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -24,10 +24,13 @@ a {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-
-/* Sticky footer styles
+.nav-link:hover {
+    background-color: #FF0000;
+    
+}
+    /* Sticky footer styles
 -------------------------------------------------- */
-html {
+    html {
   font-size: 14px;
 }
 @media (min-width: 768px) {
@@ -38,6 +41,12 @@ html {
 
 .border-top {
   border-top: 1px solid #e5e5e5;
+}
+.border-left {
+    border-top: 1px solid #e5e5e5;
+}
+.border-right {
+    border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
   border-bottom: 1px solid #e5e5e5;

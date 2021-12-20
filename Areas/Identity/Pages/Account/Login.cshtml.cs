@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using FinalProject.Data;
+using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Areas.Identity.Pages.Account
 {
@@ -20,14 +23,16 @@ namespace FinalProject.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -83,6 +88,51 @@ namespace FinalProject.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    ////Write the logic for checkout dates
+                    ///
+                    var user = await _userManager.FindByEmailAsync(Input.Email);
+                    var userId = user.Id;
+                    var books = await _context.Books.Where(b => b.UserId.Contains(userId)).ToListAsync();
+
+                    if (books.Count > 0)
+                    {
+                        TimeSpan t;
+                        int days;
+                        ErrorMessage = "<div style='text-align:center;position:relative;left:150px;'><table><thead><tr><th>Book Title</th><th>Due Date</th><th>Days Left</th></tr></thead><tbody>";
+
+
+                        foreach (var item in books)
+                        {
+                            
+                            t = (TimeSpan)(item.DueDate - DateTime.Now);
+                            days = t.Days;
+
+                            if(days <= 3 && days > 0)
+                            {
+                                ErrorMessage = ErrorMessage + 
+                                    "<tr><td>" + item.Title + "</td>" + 
+                                    "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" + 
+                                    "<td>" + days + "</td></tr>";
+                            }
+
+                            else if (days < 0)
+                            {
+                                ErrorMessage = ErrorMessage +
+                                    "<tr><td>" + item.Title + "</td>" +
+                                    "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" +
+                                    "<td>" + "Overdue. Please return soon" + "</td></tr>";
+                            }
+                        }
+                        if (ErrorMessage != null)
+                        {
+                            ErrorMessage = ErrorMessage;
+                                           
+                        }
+                        ErrorMessage = ErrorMessage + "</tbody></table></div>";
+                    }
+                   
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
