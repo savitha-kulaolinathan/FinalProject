@@ -11,6 +11,7 @@ a.navbar-brand {
 a {
   color: #0366d6;
 }
+  
 
 .btn-primary {
   color: #fff;
@@ -71,7 +72,7 @@ body {
 }
 
 .bookImage {
-    background-image: url("../Images/books.png");
+    background-image: url("../Images/background.png");
     background-repeat: no-repeat;   
     background-size: cover;
     
