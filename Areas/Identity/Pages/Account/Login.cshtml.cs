@@ -99,8 +99,9 @@ namespace FinalProject.Areas.Identity.Pages.Account
                     {
                         TimeSpan t;
                         int days;
-                        
-                         
+                        ErrorMessage = "<div style='text-align:center;position:relative;left:150px;'><table><thead><tr><th>Book Title</th><th>Due Date</th><th>Days Left</th></tr></thead><tbody>";
+
+
                         foreach (var item in books)
                         {
                             
@@ -109,20 +110,26 @@ namespace FinalProject.Areas.Identity.Pages.Account
 
                             if(days <= 3 && days > 0)
                             {
-                                ErrorMessage = ErrorMessage + item.Title + " " + item.DueDate.ToString() + " " + days + "left" + "\n";
+                                ErrorMessage = ErrorMessage + 
+                                    "<tr><td>" + item.Title + "</td>" + 
+                                    "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" + 
+                                    "<td>" + days + "</td></tr>";
                             }
 
-                            else
+                            else if (days < 0)
                             {
-                                ErrorMessage = ErrorMessage + item.Title + " " + item.DueDate.ToString() + " " + "Overdue. Please return soon.\n";
+                                ErrorMessage = ErrorMessage +
+                                    "<tr><td>" + item.Title + "</td>" +
+                                    "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" +
+                                    "<td>" + "Overdue. Please return soon" + "</td></tr>";
                             }
-                            
                         }
                         if (ErrorMessage != null)
                         {
                             ErrorMessage = ErrorMessage;
                                            
                         }
+                        ErrorMessage = ErrorMessage + "</tbody></table></div>";
                     }
                    
 

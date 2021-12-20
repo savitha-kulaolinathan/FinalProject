@@ -69,7 +69,7 @@
             </div>
         </nav>
     </header>
-    <div style="color:red">@TempData["ErrorMessage"]</div>
+    <div style="color:red">@Html.Raw(TempData["ErrorMessage"])</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
