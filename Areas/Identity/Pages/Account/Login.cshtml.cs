@@ -99,7 +99,14 @@ namespace FinalProject.Areas.Identity.Pages.Account
                     {
                         TimeSpan t;
                         int days;
-                        ErrorMessage = "<div style='text-align:center;position:relative;left:150px;'><table><thead><tr><th>Book Title</th><th>Due Date</th><th>Days Left</th></tr></thead><tbody>";
+                        ErrorMessage = "<div style='text-align:center;" +
+                            "margin:5px;" +
+                            "padding:6px;" +
+                            "position:absolute;" +
+                            "border:2px solid black;" +
+                            "background-color:white;" +
+                            "left:80%;'>" +
+                            "<table><thead><tr><th>Book Title</th><th>Due Date</th><th>Days Left</th></tr></thead><tbody>";
 
 
                         foreach (var item in books)
@@ -126,10 +133,11 @@ namespace FinalProject.Areas.Identity.Pages.Account
                         }
                         if (ErrorMessage != null)
                         {
-                            ErrorMessage = ErrorMessage;
-                                           
+                          
+                            ErrorMessage = ErrorMessage + "</tbody></table></div>";
+
                         }
-                        ErrorMessage = ErrorMessage + "</tbody></table></div>";
+                       
                     }
                    
 
