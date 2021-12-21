@@ -5,77 +5,80 @@
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<img src="~/Images/1.png" />
-<h1>Details</h1>
-<div class="table-borderless" style="align-content:center">
-    <div class="col-xl-10">
+<body class="backgroundImage">
+    <img src="~/Images/1.png" />
+    <h1>Details</h1>
+    <div class="table-borderless" style="align-content:center">
+        <div class="col-xl-10">
 
-        <table class="table">
-            <tr>
-                <td>
-                    <div class="font-weight-bold">
-                        @Html.DisplayNameFor(model => model.Title)
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        @Html.DisplayFor(model => model.Title)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="font-weight-bold">
-                        @Html.DisplayNameFor(model => model.Author)
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        @Html.DisplayFor(model => model.Author)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="font-weight-bold">
-                        @Html.DisplayNameFor(model => model.Status)
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        @Html.DisplayFor(model => model.Status)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="font-weight-bold">
-                        @Html.DisplayNameFor(model => model.Genre)
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        @Html.DisplayFor(model => model.Genre.Name)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="form-group">
-                        <a asp-action="Index">Back to List</a>
-                        
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <a  class="btn btn-primary"  asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                    </div>
-                </td>
-            </tr>
+            <table class="table">
+                <tr>
+                    <td>
+                        <div class="font-weight-bold">
+                            @Html.DisplayNameFor(model => model.Title)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Title)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="font-weight-bold">
+                            @Html.DisplayNameFor(model => model.Author)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Author)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="font-weight-bold">
+                            @Html.DisplayNameFor(model => model.Status)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Status)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="font-weight-bold">
+                            @Html.DisplayNameFor(model => model.Genre)
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            @Html.DisplayFor(model => model.Genre.Name)
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <a asp-action="Index">Back to List</a>
 
-        </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                        </div>
+                    </td>
+                </tr>
 
-        
+            </table>
+
+
+        </div>
+
+
     </div>
-
-    
+    </body>

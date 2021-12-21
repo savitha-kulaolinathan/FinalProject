@@ -4,69 +4,70 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body class="backgroundImage">
+
+    <h1 class="text-info text-left pb-1">
+        Are you sure you want to delete this book?
+    </h1>
+    <form method="post" class="ml-4" asp-action="Delete">
+        <div class="border backgroundWhite ">
 
 
-<h1 class="text-info text-left pb-1">
-    Are you sure you want to delete this book?
-</h1>
-<form method="post" class="ml-4" asp-action="Delete">
-    <div class="border backgroundWhite ">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="col-2">
+                    @Html.DisplayNameFor(model => model.Title)
+                </div>
+                <div class="col-5" style=" border:2px solid #000000;">
+                    @Html.DisplayFor(model => model.Title)
 
-
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-2">
-                @Html.DisplayNameFor(model => model.Title)
+                </div>
             </div>
-            <div class="col-5" style=" border:2px solid #000000;">
-                @Html.DisplayFor(model => model.Title)
+            <div class="form-group row">
+                <div class="col-2">
+                    @Html.DisplayNameFor(model => model.Author)
+                </div>
+                <div class="col-5" style=" border:2px solid #000000;">
+                    @Html.DisplayFor(model => model.Author)
+                </div>
 
             </div>
-             </div>
-        <div class="form-group row">
-            <div class="col-2">
-                @Html.DisplayNameFor(model => model.Author)
+            <div class="form-group row">
+                <div class="col-2">
+                    @Html.DisplayNameFor(model => model.Status)
+
+                </div>
+                <div class="col-5" style=" border:2px solid #000000;">
+                    @Html.DisplayFor(model => model.Status)
+                </div>
+
+
             </div>
-            <div class="col-5" style=" border:2px solid #000000;">
-                @Html.DisplayFor(model => model.Author)
+            <div class="form-group row">
+                <div class="col-2">
+                    @Html.DisplayNameFor(model => model.Genre)
+                </div>
+                <div class="col-5" style=" border:2px solid #000000;">
+
+                    @Html.DisplayFor(model => model.Genre.Name)
+                </div>
+
             </div>
-            
+            <div class="form-group row">
+                <div class="col-5 offset-2">
+                    <input type="hidden" asp-for="Id" />
+                    <partial name="_DeleteAndBacktolistButton" />
+                </div>
+
+            </div>
         </div>
-        <div class="form-group row">
-            <div class="col-2">
-                @Html.DisplayNameFor(model => model.Status)
-
-            </div>
-            <div class="col-5" style=" border:2px solid #000000;">
-                @Html.DisplayFor(model => model.Status)
-            </div>
-
-
-        </div>
-        <div class="form-group row">
-            <div class="col-2">
-                @Html.DisplayNameFor(model => model.Genre)
-            </div>
-            <div class="col-5" style=" border:2px solid #000000;">
-                
-                @Html.DisplayFor(model => model.Genre.Name)
-            </div>
-            
-        </div>
-        <div class="form-group row">
-            <div class="col-5 offset-2">
-                <input type="hidden" asp-for="Id" />
-                <partial name="_DeleteAndBacktolistButton" />
-            </div>
-
-        </div>
-    </div>
-</form>
+    </form>
+    </body>
 
 
 
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
