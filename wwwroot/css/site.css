@@ -81,8 +81,7 @@ body {
 }
 
 .bookImage {
-    background-image: url("../Images/background.png");
-    background-repeat: no-repeat;   
+    background-image: url("../Images/book.JPG");     
     background-size: cover;
     
 }
@@ -97,4 +96,10 @@ body {
     margin-top: 10px;
     margin-right: 280px;
     margin-left: 80px;
+}
+.backgroundImage {
+    background-image: url("../Images/background.png");
+    background-size: cover;
+    background-repeat:no-repeat;
+
 }
