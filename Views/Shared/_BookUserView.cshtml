@@ -1,20 +1,6 @@
 ﻿@model IEnumerable<FinalProject.Models.Book>
 
-
-
-@*<div class="card flex-row" style="width: 18rem;">
-    @foreach (var item in Model)
-    {
-
-        <div class="card-body m-4">
-            <h5 class="card-title">  @Html.DisplayFor(modelItem => item.Title)</h5>
-          
-            <partial name="_DetailView" model="item.Id" />
-        </div>
-
-    }
-</div>*@
-    <h1>This is a List view of the books</h1>
+    <h1>List of books</h1>
         <table class="table">
             <thead>
                 <tr>
@@ -33,7 +19,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Genre)
                     </th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +45,7 @@
                             @Html.DisplayFor(modelItem => item.Genre.Name)
                         </td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            <partial name="_DetailView" model="item.Id" />
                         </td>
                     </tr>
                 }
