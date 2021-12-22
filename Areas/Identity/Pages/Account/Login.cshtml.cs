@@ -79,6 +79,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
+            var bFlag = false;
 
             if (ModelState.IsValid)
             {
@@ -117,6 +118,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
 
                             if(days <= 3 && days > 0)
                             {
+                                bFlag = true;
                                 ErrorMessage = ErrorMessage + 
                                     "<tr><td>" + item.Title + "</td>" + 
                                     "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" + 
@@ -125,6 +127,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
 
                             else if (days < 0)
                             {
+                                bFlag = true;
                                 ErrorMessage = ErrorMessage +
                                     "<tr><td>" + item.Title + "</td>" +
                                     "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" +
@@ -139,7 +142,8 @@ namespace FinalProject.Areas.Identity.Pages.Account
                         }
                        
                     }
-                   
+
+                    ErrorMessage = bFlag == false ? "" : ErrorMessage;
 
                     return LocalRedirect(returnUrl);
                 }
@@ -160,6 +164,8 @@ namespace FinalProject.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+
+
             return Page();
         }
     }

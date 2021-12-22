@@ -5,22 +5,7 @@
 
 <body class="bookImage">
 </body>
-<div class="bg-white">
-    <h1>List of books</h1>
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>
-                <a asp-action="Details" asp-controller="Books" asp-route-id="@item.Id">@item.Title</a>
-                <p>@item.Author</p>
-            </li>
 
-        }
-    </ul>
-
-
-
-</div>
 
 
 

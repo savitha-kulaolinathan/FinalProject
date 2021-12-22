@@ -14,20 +14,18 @@ namespace FinalProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
-
+       
         
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _context = context;
+           
 
         }
 
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
         {
-            var applicationDbContext = _context.Books.Include(b => b.Genre);
-            return View(await applicationDbContext.ToListAsync());
+            return View();
             
         }
 
