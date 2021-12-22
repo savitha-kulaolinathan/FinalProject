@@ -3,6 +3,7 @@
 
 
 
+
 <h1> List view of books</h1>
 @*<table class="table">
     <thead>
@@ -37,11 +38,14 @@
             <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Author)</h6>
             <p class="card-text">
                 @if (User.Identity.IsAuthenticated)
+
                 {
+
 
 
                     <input type="button" id="checkout" class="btn btn-primary text-white"
                            onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+
 
 
                 }
