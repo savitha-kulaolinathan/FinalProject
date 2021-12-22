@@ -2,23 +2,19 @@
 @model RegisterModel
 
 
-<div class=" container w-75">
-    <h2 class="text-info ml-5 pl-5">Create a New Account</h2>
-
-    <h1>@ViewData["Title"]</h1>
-
-
+<div class=" container">
+    <h2 class="text-info text-center ml-5 pl-5">Create a New Account</h2>
 
     <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-        <div class="border p-5 w-75" style="border-radius:30px;background-color:antiquewhite; ">
+        <div class=" border container p-5 w-50 rounded shadow mb-5 bg-white rounded" style="background-color:#dae2e1; ">
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group row">
-                <div class="col-4">
+                <div class="col-md-4">
                     <label asp-for="Input.Name" class="col-form-label"></label>
                 </div>
 
-                <div class="col-8">
+                <div class="col-md-8">
                     <input asp-for="Input.Name" class="form-control" />
 
                 </div>
@@ -26,7 +22,7 @@
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <div class="col-4">
+                <div class="col-md-4">
                     <label asp-for="Input.Email" class="col-form-label"></label>
                 </div>
 
@@ -115,11 +111,10 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group row">
-                <div class="col-8 offset-4">
+                <div class="col-md-8 offset-md-4">
                     <button type="submit" class="btn btn-primary form-control">Register</button>
 
                 </div>
-
 
             </div>
 
