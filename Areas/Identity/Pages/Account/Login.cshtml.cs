@@ -79,8 +79,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-            var bFlag = false;
-
+           
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -89,62 +88,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-
-                    ////Write the logic for checkout dates
-                    ///
-                    var user = await _userManager.FindByEmailAsync(Input.Email);
-                    var userId = user.Id;
-                    var books = await _context.Books.Where(b => b.UserId.Contains(userId)).ToListAsync();
-
-                    if (books.Count > 0)
-                    {
-                        TimeSpan t;
-                        int days;
-                        ErrorMessage = "<div style='text-align:center;" +
-                            "margin:5px;" +
-                            "padding:6px;" +
-                            "position:absolute;" +
-                            "border:2px solid black;" +
-                            "background-color:white;" +
-                            "left:80%;'>" +
-                            "<table><thead><tr><th>Book Title</th><th>Due Date</th><th>Days Left</th></tr></thead><tbody>";
-
-
-                        foreach (var item in books)
-                        {
-                            
-                            t = (TimeSpan)(item.DueDate - DateTime.Now);
-                            days = t.Days;
-
-                            if(days <= 3 && days > 0)
-                            {
-                                bFlag = true;
-                                ErrorMessage = ErrorMessage + 
-                                    "<tr><td>" + item.Title + "</td>" + 
-                                    "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" + 
-                                    "<td>" + days + "</td></tr>";
-                            }
-
-                            else if (days < 0)
-                            {
-                                bFlag = true;
-                                ErrorMessage = ErrorMessage +
-                                    "<tr><td>" + item.Title + "</td>" +
-                                    "<td>" + item.DueDate.Value.ToShortDateString() + "</td>" +
-                                    "<td>" + "Overdue. Please return soon" + "</td></tr>";
-                            }
-                        }
-                        if (ErrorMessage != null)
-                        {
-                          
-                            ErrorMessage = ErrorMessage + "</tbody></table></div>";
-
-                        }
-                       
-                    }
-
-                    ErrorMessage = bFlag == false ? "" : ErrorMessage;
-
+                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

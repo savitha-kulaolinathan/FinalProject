@@ -5,57 +5,32 @@
 
 
 <h1> List view of books</h1>
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <th>
-                    @Html.DisplayNameFor(model => model.Status)
-                </th>
-            }
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbod*@
-
-
 @foreach (var item in Model)
 {
-<div class="d-inline-flex p-md-2 m-md-5 align-content-center justify-content-center" style="color:cadetblue">
-    <div class="card" style="width: 10rem;">
-        <div class="card-body">
-            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-            <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Author)</h6>
-            <p class="card-text">
-                @if (User.Identity.IsAuthenticated)
+    <div class="d-inline-flex p-md-2 m-md-5 align-content-center justify-content-center" style="color:cadetblue">
+        <div class="card" style="width: 10rem;">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Author)</h6>
+                <p class="card-text">
+                    @if (User.Identity.IsAuthenticated)
 
-                {
-
-
-
-                    <input type="button" id="checkout" class="btn btn-primary text-white"
-                           onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+                    {
 
 
 
-                }
-            <p> @Html.DisplayFor(modelItem => item.Genre.Name)</p>
+                        <input type="button" id="checkout" class="btn btn-primary text-white"
+                               onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
 
-            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+
+                    }
+                <p> @Html.DisplayFor(modelItem => item.Genre.Name)</p>
+
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </div>
         </div>
-    </div>
-   
 
-</div>
+
+    </div>
 }
-    

@@ -50,8 +50,14 @@ namespace FinalProject.Controllers
             {
                 return "Book already checked out";
             }
-            
-
+        }
+        public async Task<IActionResult> CheckoutBooks()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
+            var books = await _context.Books.Where(b => b.UserId.Contains(userId)).ToListAsync();
+            var sortedbooks=books.OrderBy(b=>b.DueDate);
+            return View(sortedbooks);
         }
     }
 }
