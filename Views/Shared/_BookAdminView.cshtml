@@ -33,7 +33,7 @@
                         @Html.DisplayNameFor(model => model.Status)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Genre)
+                        @Html.DisplayNameFor(model => model.Category)
                     </th>
                     <th>
                         Action
@@ -51,7 +51,7 @@
                             @Enum.Parse(typeof(Book.EStatus), item.Status)
                         </td>
                         <td width="20%">
-                            @Html.DisplayFor(modelItem => item.Genre.Name)
+                            @Html.DisplayFor(modelItem => item.Category.Name)
                         </td>
                         <partial name="_TableButtonPartialView" model="item.Id" />
 

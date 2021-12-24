@@ -16,7 +16,7 @@
                 <th>Title</th>
                 <th>Author</th>
                 <th>Status</th>
-                <th>Genre</th>
+                <th>Category</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -34,7 +34,7 @@
                         @Enum.Parse(typeof(Book.EStatus), item.Status)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Genre.Name)
+                        @Html.DisplayFor(modelItem => item.Category.Name)
                     </td>
                     <td>
 

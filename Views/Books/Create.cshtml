@@ -13,8 +13,8 @@
     <form method="post" class="ml-4" asp-action="Create">
         <div class="border backgroundWhite ">
 
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
             <div class="form-group row">
                 <div class="col-2">
                     <label asp-for="Title" class="col-form-label"></label>
@@ -25,6 +25,18 @@
                 </div>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
+            <div class="form-group row">
+                <div class="col-2">
+                    <label asp-for="Title" class="col-form-label"></label>
+                </div>
+                <div class="col-5">
+                    <input asp-for="Title" class="form-control" />
+
+                </div>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
             <div class="form-group row">
                 <div class="col-2">
                     <label asp-for="Author" class="col-form-label"></label>
@@ -34,6 +46,7 @@
                 </div>
                 <span asp-validation-for="Author" class="text-danger"></span>
             </div>
+
             <div class="form-group row">
                 <div class="col-2">
                     <label asp-for="Status" class="col-form-label"></label>
@@ -47,11 +60,11 @@
             </div>
             <div class="form-group row">
                 <div class="col-2">
-                    <label asp-for="GenreId" class="col-form-label"></label>
+                    <label asp-for="CategoryId" class="col-form-label"></label>
 
                 </div>
                 <div class="col-5">
-                    <select asp-for="GenreId" class="form-control" asp-items="ViewBag.GenreId"></select>
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 </div>
 
 
@@ -70,6 +83,18 @@
 
 
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    
+    <script>
+
+        $('#isbn-btn').on('click', function() {
+            var isbn = document.getElementById("isbn-input").value;
+            console.log(isbn);
+            var url = '@Url.Action("SearchAPI", "Api")?keyword=' + isbn; 
+            window.location.href = url;
+        })
+
+    </script>
+}
