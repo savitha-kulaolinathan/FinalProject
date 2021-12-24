@@ -6,3 +6,8 @@
 }
 
 <h2>Search Results for @Model.keyword</h2>
+
+@foreach (var book in Model.books)
+{
+    <partial name="_ApiSearchBookPartial" model="book"/>
+}

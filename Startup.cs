@@ -40,7 +40,6 @@ namespace FinalProject
             services.AddRazorPages();
             services.AddSingleton<IEmailSender, EmailSender>();
             services.Configure<EmailOptions>(Configuration);
-            services.AddHttpClient();
 
         }
 

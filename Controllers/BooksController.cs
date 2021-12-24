@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
-                        
+using FinalProject.Models.ViewModels;
+
 namespace FinalProject.Controllers
 {
     public class BooksController : Controller
@@ -46,7 +47,7 @@ namespace FinalProject.Controllers
         }
 
         // GET: Books/Create
-        public IActionResult Create()
+        public IActionResult Create(ApiSearchResultViewModel? model)
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             return View();

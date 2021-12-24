@@ -1,0 +1,8 @@
+﻿@model FinalProject.Models.ViewModels.ApiSearchResultViewModel
+
+<div class="card col-4">
+    <h2>@Model.title</h2>
+    <p>@Model.subtitle</p>
+    <img src="@Model.image"/>
+    <a asp-controller="Books" asp-action="Create" asp-route-model="@Model">Add</a>
+</div>
