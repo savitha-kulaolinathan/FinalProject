@@ -25,7 +25,6 @@ namespace FinalProject.Controllers.Api
 
         public async Task<IActionResult> SearchAPI(string keyword)
         {
-
             var streamTask = _client.GetStreamAsync(SD.SearchAPIPath + keyword);
             var result = await JsonSerializer.DeserializeAsync<ApiSearchResult>(await streamTask);
             result.keyword = keyword;
@@ -37,29 +36,32 @@ namespace FinalProject.Controllers.Api
                 allBooks.Add(book);
             }
 
-            var pageNumber = Int32.Parse(result.page);
-            var quit = false;  
-            var nextResult = new ApiSearchResult();
-            
-
-            while (!quit && pageNumber < MAX_PAGE_NUMBER)
+            if (!result.total.Equals("0"))
             {
-                streamTask = _client.GetStreamAsync(SD.SearchAPIPath + keyword + "/" + pageNumber);
-                nextResult = await JsonSerializer.DeserializeAsync<ApiSearchResult>(await streamTask);
-                foreach (var book in nextResult.books)
+                var pageNumber = Int32.Parse(result.page);
+                var quit = false;
+                var nextResult = new ApiSearchResult();
+
+
+                while (!quit && pageNumber < MAX_PAGE_NUMBER)
                 {
-                    allBooks.Add(book);
+                    streamTask = _client.GetStreamAsync(SD.SearchAPIPath + keyword + "/" + pageNumber);
+                    nextResult = await JsonSerializer.DeserializeAsync<ApiSearchResult>(await streamTask);
+                    foreach (var book in nextResult.books)
+                    {
+                        allBooks.Add(book);
+                    }
+
+                    if (Int32.Parse(nextResult.total) == 0)
+                    {
+                        quit = true;
+                    }
+
+                    pageNumber++;
                 }
 
-                if (Int32.Parse(nextResult.total) == 0)
-                {
-                    quit = true; 
-                }
-
-                pageNumber++;
+                result.books = allBooks;
             }
-
-            result.books = allBooks;
 
             return View("ApiSearchResult", result);
 

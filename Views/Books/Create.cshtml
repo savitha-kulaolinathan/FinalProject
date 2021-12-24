@@ -86,16 +86,20 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
-    
+
+
     <script>
 
-        $('#isbn-btn').on('click', function() {
-            var isbn = document.getElementById("isbn-input").value;
-            console.log(isbn);
-            var url = '@Url.Action("SearchAPI", "Api")?keyword=' + isbn; 
-            window.location.href = url;
-        })
+        $('#isbn-btn').on('click',
+            function() {
+                var isbn = document.getElementById("isbn-input").value;
+
+                if (isbn != "") {
+                    console.log(isbn);
+                    var url = '@Url.Action("SearchAPI", "Api")?keyword=' + isbn;
+                    window.location.href = url;
+                }
+            })
 
     </script>
 }
