@@ -62,7 +62,7 @@ namespace FinalProject.Controllers
                     ISBN13 = isbn13,
                     CategoryId = categoryId,
                     Author = "NA",
-                    Status = "OnShelf"
+                    Status = "0"
                 };
 
                 await _context.Books.AddAsync(book);
