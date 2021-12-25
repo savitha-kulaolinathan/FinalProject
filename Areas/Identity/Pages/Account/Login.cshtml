@@ -8,14 +8,12 @@
 
 
 <body class="backgroundImage">
-    <div class="d-flex justify-content-center align-content-center mt-md-5">
-
-
+    <div class="d-flex justify-content-center align-content-center p-md-4 mt-md-5">
         <form id="account" method="post" class="d-md-block w-50  m-5 shadow mb-5 bg-white rounded">
             <div class="containerd-block justify-content-center p-2 align-content-center" style="background-color:#bcf4ef; ">
                 <h4 class="text-center" style="color:brown; font-weight:800">Login Form</h4>
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="d-md-block">
+                <div class="d-md-block p-md-4">
                     <div class="form-group">
                         <label asp-for="Input.Email" class="col-form-label"></label>
                         <input asp-for="Input.Email" class="form-control" />
@@ -40,7 +38,7 @@
                     </div>
                 </div>
 
-                <div class="container form-row justify-content-lg-between">
+                <div class="container form-row justify-content-lg-between px-md-4">
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot password?</a>
                     </p>
@@ -49,15 +47,14 @@
                     </p>
 
                 </div>
-          </div>
-
+            </div>
         </form>
     </div>
-    </body>
+</body>
 
 
 
 
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

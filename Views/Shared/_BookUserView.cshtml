@@ -40,16 +40,11 @@
                 @if (User.Identity.IsAuthenticated)
 
                 {
-
-
-
-                    <input type="button" id="checkout" class="btn btn-primary text-white"
-                           onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
-
-
+                        <input type="button" id="checkout" class="btn btn-primary text-white"
+                               onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
 
                 }
-            <p> @Html.DisplayFor(modelItem => item.Genre.Name)</p>
+<p> @Html.DisplayFor(modelItem => item.Genre.Name)</p>
 
             <a asp-action="Details" asp-route-id="@item.Id">Details</a>
         </div>
