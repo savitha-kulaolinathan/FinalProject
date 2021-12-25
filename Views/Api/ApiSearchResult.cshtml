@@ -1,13 +1,11 @@
 ﻿@model FinalProject.Models.Api.ApiSearchResult
 
-@{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
-}
-
 <h2>Search Results for @Model.keyword</h2>
+
+<hr />
 
 @foreach (var book in Model.books)
 {
-    <partial name="_ApiSearchBookPartial" model="book"/>
+    <partial name="_ApiSearchBookPartial" model="book" />
 }
+

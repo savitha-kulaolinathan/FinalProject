@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace FinalProject.Data.Migrations
+namespace FinalProject.Migrations
 {
-    public partial class AddColumsToBooksTableAndChangeGenresToCategories : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

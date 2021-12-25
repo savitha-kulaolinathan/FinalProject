@@ -10,75 +10,27 @@
 
     <h2 class="text-info text-sm-left pb-4">Add new Book</h2>
 
-    <form method="post" class="ml-4" asp-action="Create">
-        <div class="border backgroundWhite ">
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="Title" class="col-form-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="Title" class="form-control" />
-
-                </div>
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="ISBN13" class="col-form-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="ISBN13" id="isbn-input" class="form-control" />
-                </div>
-                <div class="col-2">
-                    <input type="button" value="Search" id="isbn-btn" class="btn btn-outline-secondary"/>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="Author" class="col-form-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="Author" class="form-control" />
-                </div>
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="Status" class="col-form-label"></label>
-
-                </div>
-                <div class="col-5">
-                    <select asp-for="Status" asp-items="Html.GetEnumSelectList<Book.EStatus>()" class="form-control"></select>
-                </div>
-
-
-            </div>
-            <div class="form-group row">
-                <div class="col-2">
-                    <label asp-for="CategoryId" class="col-form-label"></label>
-
-                </div>
-                <div class="col-5">
-                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
-                </div>
-
-
-            </div>
-            <div class="form-group row">
-                <div class="col-5 offset-2">
-                    <partial name="_CreateAndBackButtonView" />
-                </div>
-
-            </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="CategoryId" class="col-form-label"></label>
         </div>
-    </form>
-    </body>
+        <div class="col-3">
+            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+        </div>
+        <div class="col-2">
+            @Html.ActionLink("Add Category", "Create", "Categories", null, new { @class = "btn btn-primary" })
+        </div>
+        <div class="col-4">
+            <button id="search" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+
+    <span id="Status" style="display:none">Searching API please wait..</span>
+    <div id="SearchResults">
+
+    </div>
+
+</body>
 
 
 
@@ -88,18 +40,47 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 
-    <script>
+<script>
 
-        $('#isbn-btn').on('click',
-            function() {
-                var isbn = document.getElementById("isbn-input").value;
+$('#search').on('click',
+    function () {
+        $("#Status").show();
+        $("#SearchResults").html('');
+        var categoryId = $("#CategoryId").val();
 
-                if (isbn != "") {
-                    console.log(isbn);
-                    var url = '@Url.Action("SearchAPI", "Api")?keyword=' + isbn;
-                    window.location.href = url;
+        if (categoryId > 0) {
+            var url = '@Url.Action("SearchAPI", "Api")?categoryId=' + categoryId;
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (data) {
+                    $("#SearchResults").html(data);
+                    $("#Status").hide();
+                },
+                error: function (response) {
+                    console.log(response);
                 }
             })
+        }
+    })
 
-    </script>
+
+    function CreateBook(title, subtitle, isbn, image, url, categoryId) {
+        var params = { title: title, subtitle: subtitle, image: image, isbn13: isbn, url: url, categoryId: categoryId };
+        var createUrl = '@Url.Action("Create","Books")';
+        var indexUrl = '@Url.Action("Index","Books")';
+        $.ajax({
+            url: createUrl,
+            method: 'GET',
+            data: params,
+            success: function (data) {
+                window.location.href = indexUrl;
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        })
+    }
+
+</script>
 }

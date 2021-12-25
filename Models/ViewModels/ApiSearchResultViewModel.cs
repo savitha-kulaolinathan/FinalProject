@@ -10,8 +10,8 @@ namespace FinalProject.Models.ViewModels
         public string title { get; set; }
         public string subtitle { get; set; }
         public string image { get; set; }
-        public string description { get; set; }
         public string isbn13 { get; set; }
         public string url { get; set; }
+        public int CategoryId { get; set; }
     }
 }

@@ -47,9 +47,29 @@ namespace FinalProject.Controllers
         }
 
         // GET: Books/Create
-        public IActionResult Create(ApiSearchResultViewModel? model)
+        public async Task<IActionResult> Create(string title,string subtitle,string url,string image, string isbn13, int categoryId)
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            var newBook = new Book();
+            
+            if (!string.IsNullOrEmpty(title))
+            {
+                var book = new Book()
+                {
+                    Title = title,
+                    Subtitle = subtitle,
+                    Image = image,
+                    MoreInfoUrl = url,
+                    ISBN13 = isbn13,
+                    CategoryId = categoryId,
+                    Author = "NA",
+                    Status = "OnShelf"
+                };
+
+                await _context.Books.AddAsync(book);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", newBook.CategoryId);
             return View();
         }
 

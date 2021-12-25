@@ -8,23 +8,29 @@ using System.Threading.Tasks;
 using System.Xml.Schema;
 using FinalProject.Models.Api;
 using FinalProject.Models.ViewModels;
+using FinalProject.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Controllers.Api
 {
     public class ApiController : Controller
     {
         private readonly HttpClient _client;
+        private readonly ApplicationDbContext _context;
         private const int SEARCH_RESULTS_PER_PAGE = 10;
         private const int MAX_RESULTS_RETURNED = 50;
         private const int MAX_PAGE_NUMBER = MAX_RESULTS_RETURNED / SEARCH_RESULTS_PER_PAGE;
 
-        public ApiController()
+        public ApiController(ApplicationDbContext context)
         {
             _client = new HttpClient();
+            _context = context;
         }
 
-        public async Task<IActionResult> SearchAPI(string keyword)
+        public async Task<IActionResult> SearchAPI(int categoryId)
         {
+            var category = await _context.Categories.Where(x => x.Id == categoryId).FirstOrDefaultAsync();
+            var keyword = category.Name;
             var streamTask = _client.GetStreamAsync(SD.SearchAPIPath + keyword);
             var result = await JsonSerializer.DeserializeAsync<ApiSearchResult>(await streamTask);
             result.keyword = keyword;
@@ -33,6 +39,7 @@ namespace FinalProject.Controllers.Api
 
             foreach (var book in result.books)
             {
+                book.CategoryId = categoryId;
                 allBooks.Add(book);
             }
 
@@ -49,6 +56,7 @@ namespace FinalProject.Controllers.Api
                     nextResult = await JsonSerializer.DeserializeAsync<ApiSearchResult>(await streamTask);
                     foreach (var book in nextResult.books)
                     {
+                        book.CategoryId = categoryId;
                         allBooks.Add(book);
                     }
 
