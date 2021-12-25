@@ -10,6 +10,7 @@
 </head>
 <body>
     <header>
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm  container-fluid navbar-fixed-top border-bottom box-shadow mb-3" style="background-color: black;">
             <button class="navbar-toggler bg-white text-black-50" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +20,6 @@
                 <div class="nav-item">
                     <img src="/Images/white_library_logo.png" width="140" height="80" />
                 </div>
-
                 <ul class="navbar-nav flex-md-grow-1">
                     @if (User.IsInRole("Admin"))
                     {
@@ -46,9 +46,6 @@
                             <a class="nav-link text-white font-weight-bold" asp-area="" asp-controller="Books" asp-action="Index"><i class="fas fa-book-open fa-2x"></i></a>
                             <p class="text-white font-weight-bold">Catalog</p>
                         </li>
-
-
-
                     }
 
                 </ul>
@@ -65,7 +62,6 @@
             </div>
         </nav>
     </header>
-    <div style="color:red">@Html.Raw(TempData["ErrorMessage"])</div>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()

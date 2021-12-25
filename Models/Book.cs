@@ -16,12 +16,31 @@ namespace FinalProject.Models
         [StringLength(255)]
         public string Title { get; set; }
 
+        public string Subtitle { get; set; }
+
         [Required]
         [StringLength(255)]
         public string Author { get; set; }
 
-        public DateTime? CheckOutDate { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual Category Category { get; set; }
 
+        [Display(Name = "Category")]
+        public int CategoryId { get; set; }
+
+        public string ISBN13 { get; set; }
+
+        public string Image { get; set; }
+
+
+        public string Description { get; set; }
+
+        public string MoreInfoUrl { get; set; }
+
+        public string Year { get; set; }
+
+        public DateTime? CheckOutDate { get; set; }
+        
         public DateTime? DueDate { get; set; }
 
         [Required]
@@ -35,11 +54,6 @@ namespace FinalProject.Models
             CheckedOut = 1
         }
 
-        [ForeignKey("GenreId")]
-        public virtual Genre Genre { get; set; }
-
-        [Display(Name = "Genre")]
-        public int GenreId { get; set; }
         public string UserId { get; set; }
         public Book()
         {

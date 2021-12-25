@@ -1,0 +1,11 @@
+﻿@model FinalProject.Models.Api.ApiSearchResult
+
+<h2>Search Results for @Model.keyword</h2>
+
+<hr />
+
+@foreach (var book in Model.books)
+{
+    <partial name="_ApiSearchBookPartial" model="book" />
+}
+

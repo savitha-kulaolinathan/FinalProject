@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using FinalProject.Models.ViewModels;
 
 namespace FinalProject.Controllers
 {
@@ -22,7 +23,7 @@ namespace FinalProject.Controllers
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Books.Include(b => b.Genre);
+            var applicationDbContext = _context.Books.Include(b => b.Category);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -35,7 +36,7 @@ namespace FinalProject.Controllers
             }
 
             var book = await _context.Books
-                .Include(b => b.Genre)
+                .Include(b => b.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
@@ -46,9 +47,29 @@ namespace FinalProject.Controllers
         }
 
         // GET: Books/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(string title,string subtitle,string url,string image, string isbn13, int categoryId)
         {
-            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Name");
+            var newBook = new Book();
+            
+            if (!string.IsNullOrEmpty(title))
+            {
+                var book = new Book()
+                {
+                    Title = title,
+                    Subtitle = subtitle,
+                    Image = image,
+                    MoreInfoUrl = url,
+                    ISBN13 = isbn13,
+                    CategoryId = categoryId,
+                    Author = "NA",
+                    Status = "OnShelf"
+                };
+
+                await _context.Books.AddAsync(book);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", newBook.CategoryId);
             return View();
         }
 
@@ -57,7 +78,7 @@ namespace FinalProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Author,Status,GenreId")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,Title,Author,Status,CategoryId")] Book book)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +86,7 @@ namespace FinalProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Name", book.GenreId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
             return View(book);
         }
 
@@ -82,7 +103,7 @@ namespace FinalProject.Controllers
             {
                 return NotFound();
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Name", book.GenreId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
             return View(book);
         }
 
@@ -91,7 +112,7 @@ namespace FinalProject.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,Status,GenreId")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Author,Status,CategoryId")] Book book)
         {
             if (id != book.Id)
             {
@@ -118,7 +139,7 @@ namespace FinalProject.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "Name", book.GenreId);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
             return View(book);
         }
 
@@ -131,7 +152,7 @@ namespace FinalProject.Controllers
             }
 
             var book = await _context.Books
-                .Include(b => b.Genre)
+                .Include(b => b.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (book == null)
             {
@@ -161,8 +182,8 @@ namespace FinalProject.Controllers
         //GET: Books/SearchByKeyword/String
         public async Task<IActionResult> SearchByKeyword(string keyword)
         {
-            var books = await _context.Books.Include(b => b.Genre)
-                .Where(b => b.Author.Contains(keyword) || b.Title.Contains(keyword) || b.Genre.Name.Contains(keyword)).ToListAsync();
+            var books = await _context.Books.Include(b => b.Category)
+                .Where(b => b.Author.Contains(keyword) || b.Title.Contains(keyword) || b.Category.Name.Contains(keyword)).ToListAsync();
 
             var viewModel = new SearchByKeywordViewModel()
             {

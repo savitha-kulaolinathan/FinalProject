@@ -7,20 +7,6 @@
 <body class="backgroundImage">
 
     <h1>@Model.SearchKeyword</h1>
-
-
-
-    @*<table class="table">*@
-    @*<thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Status</th>
-                <th>Genre</th>
-                <th>Action</th>
-            </tr>
-        </thead>*@
-    @*<tbody>*@
     @foreach (var item in Model.Books)
     {
         <div class="container d-inline-block" >
@@ -38,29 +24,9 @@
             </p>
             <p>  <partial name="_DetailView" model="item.Id" /></p>
         </div>
-
-
-        @*<tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Enum.Parse(typeof(Book.EStatus), item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre.Name)
-                </td>
-                <td>
-
-                    <partial name="_DetailView" model="item.Id" />
-
-                </td>
-            </tr>*@
     }
-    @*</tbody>
-        </table>*@
+   
 </body>
+
+
 
