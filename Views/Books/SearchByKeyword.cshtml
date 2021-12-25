@@ -20,7 +20,7 @@
                 @Enum.Parse(typeof(Book.EStatus), item.Status)
             </p>
             <p>
-                @Html.DisplayFor(modelItem => item.Genre.Name)
+                @Html.DisplayFor(modelItem => item.Category.Name)
             </p>
             <p>  <partial name="_DetailView" model="item.Id" /></p>
         </div>
