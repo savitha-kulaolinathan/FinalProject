@@ -15,6 +15,7 @@
                 <p class="card-text">
                     @if (User.Identity.IsAuthenticated)
 
+
                     {
 
 
@@ -26,6 +27,7 @@
 
                     }
                 <p> @Html.DisplayFor(modelItem => item.Category.Name)</p>
+
 
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </div>
