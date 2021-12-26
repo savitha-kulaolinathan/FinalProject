@@ -4,6 +4,8 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+ <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+
 
 <body class="backgroundImage">
 
@@ -21,7 +23,7 @@
 
 </body>
 
-@section Scripts{ 
+@section Scripts{
 
     <script type="text/javascript">
     function checkOut(id) {
@@ -32,6 +34,7 @@
             url: checkInurl,
             type: 'GET',
             success: function (response) {
+                //bootbox.alert(response)
                 alert(response);
                 window.location.href = indexUrl;
             },

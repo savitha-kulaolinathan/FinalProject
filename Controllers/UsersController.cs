@@ -42,9 +42,9 @@ namespace FinalProject.Controllers
                 bookInDb.CheckOutDate = book.CheckOutDate;
                 bookInDb.UserId = userId;
                 bookInDb.Status = "1";
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 await _emailSender.SendEmailAsync(user.Email, "Book Checked out", " Successfully");
-                return "Book Checked out successfully. Your due date is " + book.DueDate.ToString(); ;
+                return "Book Checked out successfully. Your due date is " + book.DueDate.ToString(); 
             }
             else
             {
@@ -58,6 +58,29 @@ namespace FinalProject.Controllers
             var books = await _context.Books.Where(b => b.UserId.Contains(userId)).ToListAsync();
             var sortedbooks=books.OrderBy(b=>b.DueDate);
             return View(sortedbooks);
+        }
+
+        public async Task<String> Return(int id)
+        {
+            var book = await _context.Books.FindAsync(id);
+            var user = await _userManager.GetUserAsync(User);
+            var email = user.Email;
+            var userId = user.Id;
+
+            if (book.Status.Equals("1"))
+            {
+               
+                var bookInDb = _context.Books.Single(b => b.Id == id);
+                bookInDb.CheckOutDate = null;
+                bookInDb.UserId = null;
+                bookInDb.DueDate = null;
+                bookInDb.Status = "0";
+                _context.SaveChanges();
+                await _emailSender.SendEmailAsync(user.Email, "Book Checked out", " Successfully");
+                
+            }
+            return "Book returned successfully.";
+
         }
     }
 }
