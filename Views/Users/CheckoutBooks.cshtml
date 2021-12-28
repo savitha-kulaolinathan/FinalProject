@@ -53,6 +53,33 @@
         </tbody>
     </table>
 }
+            else
+            {
+                    <p>No books checked out. </p>
+
+            }
+@section Scripts{
+
+    <script type="text/javascript">
+    function bookReturn(id) {
+        var checkInurl = '@Url.Action("Return", "Users")';
+        var indexUrl = '@Url.Action("Index", "Books")';
+        checkInurl = checkInurl + '/?id=' + id;
+        $.ajax({
+            url: checkInurl,
+            type: 'GET',
+            success: function (response) {
+                alert(response);
+                window.location.href = indexUrl;
+            },
+            error: function () {
+
+            }
+        })
+    }
+
+    </script>
+}
 
 
 
