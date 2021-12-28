@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 
  git rm --cached appsettings.json
+
+ appsettings.json
+ appsettings.Development.json
