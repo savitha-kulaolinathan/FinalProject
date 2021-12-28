@@ -47,6 +47,17 @@ namespace FinalProject.Controllers
         }
 
         // GET: Books/Create
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var newBook = new Book();
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", newBook.CategoryId);
+            return View();
+        }
+
+
+        //POST: Books/Create
+        [HttpPost]
         public async Task<IActionResult> Create(string title,string subtitle,string url,string image, string isbn13, int categoryId)
         {
             var newBook = new Book();
@@ -73,22 +84,7 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        // POST: Books/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Author,Status,CategoryId")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
-            return View(book);
-        }
+    
 
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)

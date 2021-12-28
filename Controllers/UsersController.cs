@@ -33,6 +33,7 @@ namespace FinalProject.Controllers
             var user = await _userManager.GetUserAsync(User);
             var email = user.Email;
             var userId = user.Id;
+            var title = book.Title;
             
             book.DueDate = (DateTime.Now).AddDays(14);
             if (book.Status.Equals("0"))
@@ -43,8 +44,8 @@ namespace FinalProject.Controllers
                 bookInDb.UserId = userId;
                 bookInDb.Status = "1";
                 _context.SaveChanges();
-                await _emailSender.SendEmailAsync(user.Email, "Book Checked out", " Successfully");
-
+                var message = title + " checkedout successfully";
+                await _emailSender.SendEmailAsync(user.Email, "Book Checked out",message);
                 return "Book checked out successfully. Your due date is " + book.DueDate.Value.ToShortDateString()+"\n\n"+"Email sent to "+user.Email+" successfully"; 
 
             }
@@ -77,8 +78,7 @@ namespace FinalProject.Controllers
                 bookInDb.DueDate = null;
                 bookInDb.Status = "0";
                 _context.SaveChanges();
-                await _emailSender.SendEmailAsync(user.Email, "Book Checked out", " Successfully");
-
+               
             }
             return "Book returned successfully.";
 
