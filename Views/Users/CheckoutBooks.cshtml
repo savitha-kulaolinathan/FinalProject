@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Book>
+﻿@model IEnumerable<Book>   
 @{
     ViewData["Title"] = "CheckoutBooks";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +7,7 @@
 <h2>Checked Out Books</h2>
 
 
-@if (Model.Count() > 0)
+@if(Model.Count()>0)
 {
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
@@ -21,7 +21,6 @@
                 <th>
                     Days Left
                 </th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -38,13 +37,7 @@
                             <td>@Html.DisplayFor(model => item.Title)</td>
                             <td>@item.DueDate.Value.ToShortDateString()</td>
                             <td style="color:red">Overdue. Please return soon!</td>
-                            <td>
-                                <input type="button" id="return" class="btn btn-primary text-white"
-                                       onclick=bookReturn("@item.Id") value="Return" />
-                            </td>
-
-                        </tr>
-
+                        </tr> 
                     }
                     else
                     {
@@ -52,11 +45,6 @@
                             <td>@Html.DisplayFor(model => item.Title)</td>
                             <td>@item.DueDate.Value.ToShortDateString()</td>
                             <td>@days</td>
-                            <td>
-                                <input type="button" id="return" class="btn btn-primary text-white"
-                                       onclick=bookReturn("@item.Id") value="Return" />
-                            </td>
-
                         </tr>
 
                     }

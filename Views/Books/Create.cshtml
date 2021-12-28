@@ -71,7 +71,7 @@ $('#search').on('click',
         var indexUrl = '@Url.Action("Index","Books")';
         $.ajax({
             url: createUrl,
-            method: 'POST',
+            method: 'GET',
             data: params,
             success: function (data) {
                 window.location.href = indexUrl;
