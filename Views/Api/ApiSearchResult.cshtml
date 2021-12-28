@@ -1,11 +1,13 @@
 ﻿@model FinalProject.Models.Api.ApiSearchResult
+<div class="d-block">
 
-<h2>Search Results for @Model.keyword</h2>
+<h2 class="font-weight-bold font-italic" style="color:darkslateblue">Search Results for<span class="font-weight-bold text-capitalize"> @Model.keyword</span></h2>
 
-<hr />
 
 @foreach (var book in Model.books)
 {
     <partial name="_ApiSearchBookPartial" model="book" />
 }
+
+</div>
 

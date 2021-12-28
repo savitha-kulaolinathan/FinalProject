@@ -22,7 +22,7 @@
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Author)
+                        @Html.DisplayNameFor(model => model.Subtitle)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
@@ -41,7 +41,7 @@
                 {
                     <tr>
                         <td class="col-md-2 col-sm-2">@item.Title</td>
-                        <td class="col-md-2 col-sm-2">@item.Author</td>
+                        <td class="col-md-2 col-sm-2">@item.Subtitle</td>
                         <td class="col-md-2 col-sm-2">
                             @Enum.Parse(typeof(Book.EStatus), item.Status)
                         </td>
