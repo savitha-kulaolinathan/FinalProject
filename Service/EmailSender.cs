@@ -25,8 +25,8 @@ namespace FinalProject.Service
         {
            
             var client = new SendGridClient(sendGridKey);
-            var from = new EmailAddress("kavithaa434@gmail.com", "Example User");
-            var to = new EmailAddress(email, "Example User");
+            var from = new EmailAddress("skskalyan@gmail.com", "ITLibrary");
+            var to = new EmailAddress(email, email);
             var plainTextContent = message;
             var htmlContent = "<strong>" + message + "</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);

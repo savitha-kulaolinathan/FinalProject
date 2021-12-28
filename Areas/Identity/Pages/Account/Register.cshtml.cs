@@ -67,11 +67,23 @@ namespace FinalProject.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            public string Name { get; set; }
+            public string FirstName { get; set; }
+
+            public string LastName { get; set; }
+
+            [Required]
             public string StreetAddress { get; set; }
+
+            [Required]
             public string PhoneNumber { get; set; }
+
+            [Required]
             public string City { get; set; }
+
+            [Required]
             public string State { get; set; }
+
+            [Required]
             public string  PostalCode{ get; set; }
         }
 
@@ -91,10 +103,13 @@ namespace FinalProject.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
-                { UserName = Input.Email, 
+                { 
+                    UserName = Input.Email, 
                     Email = Input.Email,
-                    Name = Input.Name,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
                     City = Input.City,
+                    StreetAddress = Input.StreetAddress,
                     State = Input.State,
                     PostalCode = Input.PostalCode,
                     PhoneNumber = Input.PhoneNumber

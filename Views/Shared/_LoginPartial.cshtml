@@ -26,7 +26,9 @@
                                     </div>
                                     <div class="modal-body">
                                         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Edit Profile</a>
+                                        @if (User.IsInRole("User")) { 
                                         <a class="nav-link text-dark" asp-controller="Users" asp-action="CheckoutBooks" title="Manage">My books</a>
+                                        }
                                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
                                             <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                                         </form>
