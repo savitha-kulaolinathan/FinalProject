@@ -9,20 +9,33 @@
     <h1>@Model.SearchKeyword</h1>
     @foreach (var item in Model.Books)
     {
-        <div class="container d-inline-block" >
-            <p>
-                @Html.DisplayFor(modelItem => item.Title)
-            </p>
-            <p>
-                @Html.DisplayFor(modelItem => item.Author)
-            </p>
-            <p>
+        <div class="card d-md-inline-flex m-md-2 p-md-1" style="width: 18rem; height:38rem;">
+            <img  class="card-img-top " src="@item.Image"/>
+            <div class-body>
+                <h5 class="card-title text-center">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h5>
+                <h6 class="card-subtitle font-italic">
+                    @Html.DisplayFor(modelItem => item.Subtitle)
+                </h6>
+                <p class="card-text text-center font-weight-bold">
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </p>
+                <div class="d-flex justify-content-md-between align-items-center m-md-2 card-footer">
+                    @if (User.Identity.IsAuthenticated)
+
+                    {
+                        <button class="card-text text-md-center  text-white font-weight-bolder btn btn-secondary m-md-1">
                 @Enum.Parse(typeof(Book.EStatus), item.Status)
-            </p>
-            <p>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </p>
-            <p>  <partial name="_DetailView" model="item.Id" /></p>
+            </button>
+                    }
+                        <button class="card-text text-white text-md-center font-weight-bolder btn btn-secondary m-md-1">
+                            <a href="@item.MoreInfoUrl" class="text-white">More info</a>
+                        </button>
+
+
+                    </div>
+            </div>
         </div>
     }
    

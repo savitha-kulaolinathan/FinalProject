@@ -1,38 +1,29 @@
 ﻿@model IEnumerable<FinalProject.Models.Book>
 
-
-
-
-
-<h1> List view of books</h1>
+<h1 class="text-success"> List of Books</h1>
 @foreach (var item in Model)
 {
-    <div class="d-inline-flex p-md-2 m-md-5 align-content-center justify-content-center" style="color:cadetblue">
-        <div class="card" style="width: 10rem;">
-            <div class="card-body">
+    <div class="d-md-flexbox p-md-2 m-md-5 align-content-center justify-content-md-around" style="color:#294849;">
+        <div class="card shadow m-md-5" style="width:17rem; height:20rem;">
+            <div class="card-body p-md-4">
                 <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-                <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Author)</h6>
+                 <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Subtitle)</h6>
                 <p class="card-text">
                     @if (User.Identity.IsAuthenticated)
 
-
                     {
-
-
-
                         <input type="button" id="checkout" class="btn btn-primary text-white"
                                onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
-
-
-
                     }
                 <p> @Html.DisplayFor(modelItem => item.Category.Name)</p>
-
-
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-success text-white px-4" asp-action="Details" asp-route-Id="@item.Id">
+                    <i class="fas fa-list-alt fa-5x" style="font-size:20px"></i>
+                </a>
+                
             </div>
         </div>
 
-
     </div>
 }
+
+

@@ -10,15 +10,15 @@ using SendGrid.Helpers.Mail;
 namespace FinalProject.Service
 {
     public class EmailSender : IEmailSender { 
-        public EmailOptions options { get; set; }
+        public EmailOptions Options { get; set; }
     
         public EmailSender(IOptions<EmailOptions> emailoptions)
         {
-          options = emailoptions.Value;
+          Options = emailoptions.Value;
         }
         public Task SendEmailAsync(string email, string subject,string message)
         {
-            return Excute(options.SendGridKey, subject, message, email);
+            return Excute(Options.SendGridKey, subject, message, email);
         }
 
         private async Task Excute(string sendGridKey, string subject, string message, string email)

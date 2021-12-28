@@ -29,13 +29,10 @@ a {
 }
     /* Sticky footer styles
 -------------------------------------------------- */
-    html {
+ html {
   font-size: 14px;
-}
+  }
 
-body {
-    padding-top: 70px;
-}
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -93,8 +90,7 @@ body {
 .backgroundWhite {
     background-color: whitesmoke;
     width: 850px;
-    padding-left: 60px;
-    padding-top: 60px;
+    padding-left: 60px;   
     height: 400px;
     border-radius: 10px;
     margin-top: 10px;
@@ -107,6 +103,14 @@ body {
     background-repeat:no-repeat;
 
 }
+
+
+
+
+
+         
+
+    
 
 
 
