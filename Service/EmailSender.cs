@@ -10,39 +10,27 @@ using SendGrid.Helpers.Mail;
 namespace FinalProject.Service
 {
     public class EmailSender : IEmailSender { 
-        public EmailOptions options { get; set; }
+        public EmailOptions Options { get; set; }
     
         public EmailSender(IOptions<EmailOptions> emailoptions)
         {
-          options = emailoptions.Value;
+          Options = emailoptions.Value;
         }
         public Task SendEmailAsync(string email, string subject,string message)
         {
-            return Excute(options.SendGridKey, subject, message, email);
+            return Excute(Options.SendGridKey, subject, message, email);
         }
 
-        private Task Excute(string sendGridKey, string subject, string message, string email)
+        private async Task Excute(string sendGridKey, string subject, string message, string email)
         {
+           
             var client = new SendGridClient(sendGridKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("ss@bp.com", "book"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-
-            };
-            msg.AddTo(new EmailAddress(email));
-            try
-            {
-                return client.SendEmailAsync(msg);
-
-            }
-            catch(Exception)
-            {
-
-            }
-            return null;
+            var from = new EmailAddress("skskalyan@gmail.com", "ITLibrary");
+            var to = new EmailAddress(email, email);
+            var plainTextContent = message;
+            var htmlContent = "<strong>" + message + "</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
         }
     }
 }

@@ -4,43 +4,42 @@
     ViewData["Title"] = "Books by " + @Model.SearchKeyword;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<body class="backgroundImage">
 
-<h1>@Model.SearchKeyword</h1>
+    <h1>@Model.SearchKeyword</h1>
+    @foreach (var item in Model.Books)
+    {
+        <div class="card d-md-inline-flex m-md-2 p-md-1" style="width: 18rem; height:38rem;">
+            <img  class="card-img-top " src="@item.Image"/>
+            <div class-body>
+                <h5 class="card-title text-center">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h5>
+                <h6 class="card-subtitle font-italic">
+                    @Html.DisplayFor(modelItem => item.Subtitle)
+                </h6>
+                <p class="card-text text-center font-weight-bold">
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </p>
+                <div class="d-flex justify-content-md-between align-items-center m-md-2 card-footer">
+                    @if (User.Identity.IsAuthenticated)
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Status</th>
-            <th>Genre</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Books) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
+                    {
+                        <button class="card-text text-md-center  text-white font-weight-bolder btn btn-secondary m-md-1">
                 @Enum.Parse(typeof(Book.EStatus), item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </button>
+                    }
+                        <button class="card-text text-white text-md-center font-weight-bolder btn btn-secondary m-md-1">
+                            <a href="@item.MoreInfoUrl" class="text-white">More info</a>
+                        </button>
+
+
+                    </div>
+            </div>
+        </div>
+    }
+   
+</body>
+
+
+

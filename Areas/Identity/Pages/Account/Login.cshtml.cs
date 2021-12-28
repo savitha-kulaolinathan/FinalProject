@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using FinalProject.Data;
+using FinalProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Areas.Identity.Pages.Account
 {
@@ -20,14 +23,16 @@ namespace FinalProject.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -74,7 +79,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? Url.Content("~/");
-
+           
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -83,6 +88,7 @@ namespace FinalProject.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -102,6 +108,8 @@ namespace FinalProject.Areas.Identity.Pages.Account
             }
 
             // If we got this far, something failed, redisplay form
+
+
             return Page();
         }
     }

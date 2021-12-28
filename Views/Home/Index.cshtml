@@ -1,10 +1,18 @@
-﻿@{
+﻿@model IEnumerable<Book>
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var image in Model)
+{
+    <div class="d-inline-flex">
+        <img src="@image.Image" />
+    </div>
 }
 
 
 
-<body class="bookImage"></body>
-  
+
 
 

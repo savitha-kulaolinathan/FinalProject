@@ -31,7 +31,7 @@ namespace FinalProject.Controllers
         {
             var book = await _context.Books.FindAsync(id);
             var user = await _userManager.GetUserAsync(User);
-            //var email = user.Email;
+            var email = user.Email;
             var userId = user.Id;
             
             book.DueDate = (DateTime.Now).AddDays(14);
@@ -44,13 +44,43 @@ namespace FinalProject.Controllers
                 bookInDb.Status = "1";
                 _context.SaveChanges();
                 await _emailSender.SendEmailAsync(user.Email, "Book Checked out", " Successfully");
-                return "Book Checked out successfully. Your due date is " + book.DueDate.ToString(); ;
+
+                return "Book checked out successfully. Your due date is " + book.DueDate.Value.ToShortDateString()+"\n\n"+"Email sent to "+user.Email+" successfully"; 
+
             }
             else
             {
                 return "Book already checked out";
             }
-            
+        }
+        public async Task<IActionResult> CheckoutBooks()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
+            var books = await _context.Books.Where(b => b.UserId.Contains(userId)).ToListAsync();
+            var sortedbooks=books.OrderBy(b=>b.DueDate);
+            return View(sortedbooks);
+        }
+        public async Task<String> Return(int id)
+        {
+            var book = await _context.Books.FindAsync(id);
+            var user = await _userManager.GetUserAsync(User);
+            var email = user.Email;
+            var userId = user.Id;
+
+            if (book.Status.Equals("1"))
+            {
+
+                var bookInDb = _context.Books.Single(b => b.Id == id);
+                bookInDb.CheckOutDate = null;
+                bookInDb.UserId = null;
+                bookInDb.DueDate = null;
+                bookInDb.Status = "0";
+                _context.SaveChanges();
+                await _emailSender.SendEmailAsync(user.Email, "Book Checked out", " Successfully");
+
+            }
+            return "Book returned successfully.";
 
         }
     }

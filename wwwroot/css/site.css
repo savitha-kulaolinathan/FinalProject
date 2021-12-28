@@ -29,9 +29,10 @@ a {
 }
     /* Sticky footer styles
 -------------------------------------------------- */
-    html {
+ html {
   font-size: 14px;
-}
+  }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -80,20 +81,38 @@ body {
 }
 
 .bookImage {
-    background-image: url("../Images/books.png");
-    background-repeat: no-repeat;   
+    background-image: url("../Images/book.JPG");     
     background-size: cover;
+    background-repeat:no-repeat;
     
 }
 
 .backgroundWhite {
     background-color: whitesmoke;
     width: 850px;
-    padding-left: 60px;
-    padding-top: 60px;
+    padding-left: 60px;   
     height: 400px;
     border-radius: 10px;
     margin-top: 10px;
     margin-right: 280px;
     margin-left: 80px;
 }
+.backgroundImage {
+    background-image: url("../Images/background.png");
+    background-size: cover;
+    background-repeat:no-repeat;
+
+}
+
+
+
+
+
+         
+
+    
+
+
+
+
+

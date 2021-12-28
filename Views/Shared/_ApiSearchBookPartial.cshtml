@@ -1,0 +1,18 @@
+﻿@model FinalProject.Models.ViewModels.ApiSearchResultViewModel
+
+<div class="border border-info rounded shadow w-75" style="margin-bottom:5px; margin-top:10px; padding-right:5px">
+    <div class="container d-inline-flex justify-content-between align-content-center">
+        <div class="d-block">
+            <img src="@Model.image" />
+        </div>
+        <div class="d-md-block">
+            <div class="mt-5">
+                <h4 class="text-black">@Model.title</h4>
+                <h6 class="text-black font-italic mt-5">@Model.subtitle</h6>
+            </div>
+            <div class="col-md-2 col-sm-11 offset-md-8 text-center mt-5">
+                <button onclick="CreateBook('@Model.title', '@Model.subtitle', '@Model.isbn13', '@Model.image', '@Model.url', '@Model.CategoryId')" class="btn btn-primary text-md-right">Create</button>
+            </div>
+        </div>
+    </div>
+</div>

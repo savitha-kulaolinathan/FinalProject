@@ -5,18 +5,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<body class="backgroundImage">
+
+    @if (User.IsInRole("Admin"))
+    {
+
+        <partial name="_BookAdminView" />
+
+    }
+    else
+    {
+        <partial name="_BookUserView" />
+    }
 
 
-@if (User.IsInRole("Admin"))
-{
-   
-    <partial name="_BookAdminView" />
-
-}
-else
-{
-    <partial name="_BookUserView" />
-}
+</body>
 
 @section Scripts{ 
 
