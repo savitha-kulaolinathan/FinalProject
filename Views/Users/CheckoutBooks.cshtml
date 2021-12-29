@@ -21,6 +21,7 @@
                 <th>
                     Days Left
                 </th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -71,14 +72,27 @@
     <script type="text/javascript">
     function bookReturn(id) {
         var checkInurl = '@Url.Action("Return", "Users")';
-        var indexUrl = '@Url.Action("Index", "Books")';
+        var returnUrl = '@Url.Action("CheckoutBooks", "Users")';
         checkInurl = checkInurl + '/?id=' + id;
         $.ajax({
             url: checkInurl,
             type: 'GET',
             success: function (response) {
-                alert(response);
-                window.location.href = indexUrl;
+
+                bootbox.confirm({
+                    message: response,
+                    buttons: {
+                        confirm: {
+                            label: 'OK',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function (result) {
+                        window.location.href = returnUrl;
+                    }
+                });
+                
+                
             },
             error: function () {
 

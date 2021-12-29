@@ -72,7 +72,6 @@ namespace FinalProject.Controllers
                     MoreInfoUrl = url,
                     ISBN13 = isbn13,
                     CategoryId = categoryId,
-                    Author = "NA",
                     Status = "0"
                 };
 
@@ -179,7 +178,7 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> SearchByKeyword(string keyword)
         {
             var books = await _context.Books.Include(b => b.Category)
-                .Where(b => b.Author.Contains(keyword) || b.Title.Contains(keyword) || b.Category.Name.Contains(keyword)).ToListAsync();
+                .Where(b =>b.Title.Contains(keyword) || b.Category.Name.Contains(keyword)).ToListAsync();
 
             var viewModel = new SearchByKeywordViewModel()
             {

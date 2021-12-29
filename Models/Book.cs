@@ -18,10 +18,7 @@ namespace FinalProject.Models
 
         public string Subtitle { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Author { get; set; }
-
+        
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 

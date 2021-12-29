@@ -33,8 +33,20 @@
             url: checkInurl,
             type: 'GET',
             success: function (response) {
-                alert(response);
-                window.location.href = indexUrl;
+                
+                bootbox.confirm({
+                    message: response,
+                    buttons: {
+                        confirm: {
+                            label: 'Refresh',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function (result) {
+                        window.location.href = indexUrl;
+                    }
+                });
+                
             },
             error: function () {
 

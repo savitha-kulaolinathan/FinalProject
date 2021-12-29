@@ -33,7 +33,7 @@ namespace FinalProject.Areas.Identity.Pages.Account.Manage
 
         }
 
-        
+
 
         [TempData]
         public string StatusMessage { get; set; }
@@ -43,8 +43,8 @@ namespace FinalProject.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            
-            
+
+
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Email { get; set; }
@@ -76,7 +76,7 @@ namespace FinalProject.Areas.Identity.Pages.Account.Manage
                 State = user.State,
                 City = user.City,
                 Postalcode = user.PostalCode
-                
+
             };
         }
 
@@ -118,6 +118,16 @@ namespace FinalProject.Areas.Identity.Pages.Account.Manage
             }
 
             await _signInManager.RefreshSignInAsync(user);
+
+            //Mapping custom properties
+            user.PhoneNumber = Input.PhoneNumber;
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+            user.StreetAddress = Input.StreetAddress;
+            user.City = Input.City;
+            user.State = Input.State;
+            user.PostalCode = Input.Postalcode;
+
             await _context.SaveChangesAsync();
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

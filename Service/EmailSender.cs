@@ -30,7 +30,7 @@ namespace FinalProject.Service
             var plainTextContent = message;
             var htmlContent = "<strong>" + message + "</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = await client.SendEmailAsync(msg);
+            await client.SendEmailAsync(msg);
         }
     }
 }

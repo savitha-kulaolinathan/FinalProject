@@ -46,7 +46,8 @@ namespace FinalProject.Controllers
                 _context.SaveChanges();
                 var message = title + " checkedout successfully";
                 await _emailSender.SendEmailAsync(user.Email, "Book Checked out",message);
-                return "Book checked out successfully. Your due date is " + book.DueDate.Value.ToShortDateString()+"\n\n"+"Email sent to "+user.Email+" successfully"; 
+                return "Book checked out successfully. Your due date is " + book.DueDate.Value.ToShortDateString()+ "<br /><br />" 
+                    + "Email sent to "+user.Email+" successfully. Click Refresh to continue."; 
 
             }
             else
