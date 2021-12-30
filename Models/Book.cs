@@ -29,9 +29,11 @@ namespace FinalProject.Models
 
         public string Image { get; set; }
 
-
         public string Description { get; set; }
 
+        public string Authors { get; set; }
+
+        [Display(Name="More Info URL")]
         public string MoreInfoUrl { get; set; }
 
         public string Year { get; set; }

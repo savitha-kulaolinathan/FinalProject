@@ -90,8 +90,7 @@ body {
 .backgroundWhite {
     background-color: whitesmoke;
     width: 850px;
-    padding-left: 60px;   
-    height: 400px;
+    padding: 60px;   
     border-radius: 10px;
     margin-top: 10px;
     margin-right: 280px;
