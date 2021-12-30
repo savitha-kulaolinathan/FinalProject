@@ -9,7 +9,7 @@
     <h1>@Model.SearchKeyword</h1>
     @foreach (var item in Model.Books)
     {
-        <div class="card d-md-inline-flex m-md-2 p-md-1" style="width: 18rem; height:38rem;">
+        <div class="card d-md-inline-flex m-md-3 p-md-2" style="width: 20rem; height:38rem;">
             <img  class="card-img-top " src="@item.Image"/>
             <div class-body>
                 <h5 class="card-title text-center">
@@ -21,19 +21,17 @@
                 <p class="card-text text-center font-weight-bold">
                     @Html.DisplayFor(modelItem => item.Category.Name)
                 </p>
-                <div class="d-flex justify-content-md-between align-items-center m-md-2 card-footer">
+                <div class="d-flex justify-content-md-between align-items-center m-md-2">
                     @if (User.Identity.IsAuthenticated)
 
                     {
-                        <button class="card-text text-md-center  text-white font-weight-bolder btn btn-secondary m-md-1">
+                        <button class="card-text text-md-center  text-white font-weight-bolder btn btn-primary m-md-1">
                 @Enum.Parse(typeof(Book.EStatus), item.Status)
             </button>
                     }
                         <button class="card-text text-white text-md-center font-weight-bolder btn btn-secondary m-md-1">
                             <a href="@item.MoreInfoUrl" class="text-white">More info</a>
                         </button>
-
-
                     </div>
             </div>
         </div>

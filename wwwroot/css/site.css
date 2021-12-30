@@ -81,14 +81,14 @@ body {
 }
 
 .bookImage {
-    background-image: url("../Images/book.JPG");     
+    background-image: url("../Images/pexels-1.jpeg");     
     background-size: cover;
     background-repeat:no-repeat;
     
 }
 
 .backgroundWhite {
-    background-color: whitesmoke;
+   
     width: 850px;
     padding: 60px;   
     border-radius: 10px;
@@ -102,6 +102,8 @@ body {
     background-repeat:no-repeat;
 
 }
+
+
 
 
 
