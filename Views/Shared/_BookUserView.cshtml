@@ -1,29 +1,80 @@
 ﻿@model IEnumerable<FinalProject.Models.Book>
 
 <h1 class="text-success"> List of Books</h1>
+<style>
+    .flip-card {
+        background-color: transparent;
+        width: 310px;
+        height: 390px;
+        perspective: 1000px;        
+        border-radius: 30px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 310px;
+        height: 390px;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        border-radius: 30px;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 310px;
+        height: 390px;
+        backface-visibility: hidden;
+        border-radius: 30px;
+    }
+
+    .flip-card-front {
+        padding-top: 18px;
+        background-color: rgb(255 255 255 / 0.90);
+        color: black;
+    }
+
+    .flip-card-back {
+        padding-top:40px;
+        background-color: rgb(170 206 155 / 0.90);
+        /* color: white;*/
+        color: black;
+        transform: rotateY(180deg);
+    }
+</style>
+
 @foreach (var item in Model)
 {
-    <div class="d-md-flexbox p-md-2 m-md-5 align-content-center justify-content-md-around" style="color:#294849;">
-        <div class="card shadow m-md-5" style="width:17rem; height:20rem;">
-            <div class="card-body p-md-4">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-                 <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayFor(modelItem => item.Subtitle)</h6>
-                <p class="card-text">
-                    @if (User.Identity.IsAuthenticated)
+    <div class="d-inline-flex m-4">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="@item.Image" alt="Avatar"/>
+                </div>
+                <div class="flip-card-back">
+                    <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
+                    <p>@Html.DisplayFor(modelItem => item.Subtitle)</p>
+                    <p class="card-text">
+                        @if (User.Identity.IsAuthenticated)
 
-                    {
-                        <input type="button" id="checkout" class="btn btn-primary text-white"
-                               onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
-                    }
-                <p> @Html.DisplayFor(modelItem => item.Category.Name)</p>
-                <a class="btn btn-success text-white px-4" asp-action="Details" asp-route-Id="@item.Id">
-                    <i class="fas fa-list-alt fa-5x" style="font-size:20px"></i>
-                </a>
-                
+                        {
+                            <input type="button" id="checkout" class="btn btn-primary text-white"
+                                   onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+                        }
+                    <p> @Html.DisplayFor(modelItem => item.Category.Name)</p>
+                    <a class="btn btn-success text-white px-4" asp-action="Details" asp-route-Id="@item.Id">
+                        <i class="fas fa-list-alt fa-3x" style="font-size:40px"></i>
+                    </a>
+
+                </div>
             </div>
         </div>
-
     </div>
-}
 
+}
 

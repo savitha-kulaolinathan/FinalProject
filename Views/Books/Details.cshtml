@@ -7,13 +7,16 @@
 }
 <body class="backgroundImage">
     <h1 class="text-left"> Book Details</h1>
-    <div class="container-fluid mt-md-5 d-flex justify-content-md-center shadow align-content-center" style="border:2px black solid;">
+    <div class="container-fluid mt-md-5 d-flex justify-content-md-center  bg-white shadow align-content-center" style="border:2px black solid;">
        
         <div class="col-md-4"><img src="@Model.Image" /></div>
+     
         <div class="col-md-8 p-md-4">
 
 
             <div class="container-fluid justify-content-center align-items-center m-md-2">
+   
+
                
                     <h4 class="p-md-3"><span class="font-weight-bold">Title: </span >@Html.DisplayFor(model => model.Title)</h4>
                     <h6 class="p-md-3"><span class="font-weight-bold"> Sub-Title: </span>@Html.DisplayFor(model => model.Subtitle)</h6>

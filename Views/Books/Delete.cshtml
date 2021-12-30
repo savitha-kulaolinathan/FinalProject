@@ -6,11 +6,37 @@
 }
 <body class="backgroundImage">
 
-    <h1 class="text-info text-left pb-1">
-        Are you sure you want to delete this book?
-    </h1>
-    <form method="post" class="ml-4" asp-action="Delete">
-        <div class="border backgroundWhite ">
+    <div class="container bg-light text-center"
+         style=" margin-top:230px;
+                border:2px solid black;
+                width:450px; border-radius:15px;">
+        <h1 class="font-weight-bold font-italic" style="color:darkblue">Delete</h1>
+        <h2 class="text-center pb-1">
+            Are you sure! you want to delete this book?
+        </h2>
+
+        <div class="justify-content-md-center align-content-center">
+
+            <p class="text-center font-weight-bold" style="font-family:'Yu Gothic';">
+                @Html.DisplayFor(model => model.Title)
+            
+          
+                </p>
+        </div>
+        <form asp-action="Delete" class="d-flex justify-content-center align-content-center p-5">
+            <input type="hidden" asp-for="Id" />
+            <div class="mx-5">
+                <input type="submit" value="Delete" class="btn btn-danger mr-4" />
+                <a asp-action="Index" class="btn btn-success text-white">Back to List</a>
+            </div>
+
+        </form>
+
+
+
+
+        @*<form method="post" class="ml-4" asp-action="Delete">
+
 
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -60,9 +86,10 @@
                 </div>
 
             </div>
-        </div>
-    </form>
-    </body>
+    </div>*@
+    
+    </div>
+</body>
 
 
 
