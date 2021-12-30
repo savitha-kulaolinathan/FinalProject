@@ -9,6 +9,7 @@ using System.Xml.Schema;
 using FinalProject.Models.Api;
 using FinalProject.Models.ViewModels;
 using FinalProject.Data;
+using FinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Controllers.Api
@@ -72,6 +73,15 @@ namespace FinalProject.Controllers.Api
             }
 
             return View("ApiSearchResult", result);
+
+        }
+
+        public async Task<ApiSearchResultViewModel> GetMoreDetailsByISBN(string isbn)
+        {
+            var streamTask = _client.GetStreamAsync(SD.GetByISBNPath + isbn);
+            var result = await JsonSerializer.DeserializeAsync<ApiSearchResultViewModel>(await streamTask);
+
+            return result; 
 
         }
     }

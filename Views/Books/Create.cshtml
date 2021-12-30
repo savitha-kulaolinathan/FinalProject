@@ -71,8 +71,8 @@ $('#search').on('click',
     })
 
 
-    function CreateBook(title, subtitle, isbn, image, url, categoryId) {
-        var params = { title: title, subtitle: subtitle, image: image, isbn13: isbn, url: url, categoryId: categoryId };
+    function CreateBook(isbn, categoryId) {
+        var params = {isbn13: isbn, categoryId: categoryId };
         var createUrl = '@Url.Action("Create","Books")';
         var indexUrl = '@Url.Action("Index","Books")';
         $.ajax({

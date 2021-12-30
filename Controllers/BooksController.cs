@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FinalProject.Controllers.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -58,19 +59,27 @@ namespace FinalProject.Controllers
 
         //POST: Books/Create
         [HttpPost]
-        public async Task<IActionResult> Create(string title,string subtitle,string url,string image, string isbn13, int categoryId)
+        public async Task<IActionResult> Create(string isbn13, int categoryId)
         {
             var newBook = new Book();
-            
-            if (!string.IsNullOrEmpty(title))
+
+            var apiController = new ApiController(_context);
+
+            var bookVM = await apiController.GetMoreDetailsByISBN(isbn13);
+
+
+            if (bookVM != null)
             {
                 var book = new Book()
                 {
-                    Title = title,
-                    Subtitle = subtitle,
-                    Image = image,
-                    MoreInfoUrl = url,
-                    ISBN13 = isbn13,
+                    Title = bookVM.title,
+                    Subtitle = bookVM.subtitle,
+                    Description = bookVM.desc,
+                    Image = bookVM.image,
+                    MoreInfoUrl = bookVM.url,
+                    ISBN13 = bookVM.isbn13,
+                    Authors = bookVM.authors,
+                    Year = bookVM.year,
                     CategoryId = categoryId,
                     Status = "0"
                 };
