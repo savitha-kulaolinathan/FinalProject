@@ -18,10 +18,7 @@ namespace FinalProject.Models
 
         public string Subtitle { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Author { get; set; }
-
+        
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
@@ -32,9 +29,11 @@ namespace FinalProject.Models
 
         public string Image { get; set; }
 
-
         public string Description { get; set; }
 
+        public string Authors { get; set; }
+
+        [Display(Name="More Info URL")]
         public string MoreInfoUrl { get; set; }
 
         public string Year { get; set; }

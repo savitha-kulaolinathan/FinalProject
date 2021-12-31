@@ -179,7 +179,6 @@ namespace FinalProject.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(maxLength: 255, nullable: false),
                     Subtitle = table.Column<string>(nullable: true),
-                    Author = table.Column<string>(maxLength: 255, nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     ISBN13 = table.Column<string>(nullable: true),
                     Image = table.Column<string>(nullable: true),

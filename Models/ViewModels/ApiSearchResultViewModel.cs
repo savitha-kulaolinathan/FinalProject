@@ -12,6 +12,12 @@ namespace FinalProject.Models.ViewModels
         public string image { get; set; }
         public string isbn13 { get; set; }
         public string url { get; set; }
+
+        public string desc { get; set; }
+
+        public string authors { get; set; }
+
+        public string year { get; set; }
         public int CategoryId { get; set; }
     }
 }

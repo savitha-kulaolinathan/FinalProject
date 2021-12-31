@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FinalProject.Controllers.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -47,21 +48,39 @@ namespace FinalProject.Controllers
         }
 
         // GET: Books/Create
-        public async Task<IActionResult> Create(string title,string subtitle,string url,string image, string isbn13, int categoryId)
+        [HttpGet]
+        public IActionResult Create()
         {
             var newBook = new Book();
-            
-            if (!string.IsNullOrEmpty(title))
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", newBook.CategoryId);
+            return View();
+        }
+
+
+        //POST: Books/Create
+        [HttpPost]
+        public async Task<IActionResult> Create(string isbn13, int categoryId)
+        {
+            var newBook = new Book();
+
+            var apiController = new ApiController(_context);
+
+            var bookVM = await apiController.GetMoreDetailsByISBN(isbn13);
+
+
+            if (bookVM != null)
             {
                 var book = new Book()
                 {
-                    Title = title,
-                    Subtitle = subtitle,
-                    Image = image,
-                    MoreInfoUrl = url,
-                    ISBN13 = isbn13,
+                    Title = bookVM.title,
+                    Subtitle = bookVM.subtitle,
+                    Description = bookVM.desc,
+                    Image = bookVM.image,
+                    MoreInfoUrl = bookVM.url,
+                    ISBN13 = bookVM.isbn13,
+                    Authors = bookVM.authors,
+                    Year = bookVM.year,
                     CategoryId = categoryId,
-                    Author = "NA",
                     Status = "0"
                 };
 
@@ -73,22 +92,7 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        // POST: Books/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Author,Status,CategoryId")] Book book)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(book);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", book.CategoryId);
-            return View(book);
-        }
+    
 
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -183,7 +187,7 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> SearchByKeyword(string keyword)
         {
             var books = await _context.Books.Include(b => b.Category)
-                .Where(b => b.Author.Contains(keyword) || b.Title.Contains(keyword) || b.Category.Name.Contains(keyword)).ToListAsync();
+                .Where(b =>b.Title.Contains(keyword) || b.Category.Name.Contains(keyword)).ToListAsync();
 
             var viewModel = new SearchByKeywordViewModel()
             {

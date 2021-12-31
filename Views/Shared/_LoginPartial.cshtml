@@ -5,40 +5,38 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    var FirstName = ((ApplicationUser)await UserManager.GetUserAsync(User)).FirstName;
     <ul class="navbar-nav">
         <li class="nav-item">
             <div class="collapse navbar-collapse" id="navbar-list-4">
                 <ul class="navbar-nav">
-
                     <li class="nav-item">
-                        <div type="button" class="btn btn-outline-none" data-toggle="modal" data-target="#exampleModalCenter" style="background-color:black">
-                            <img src="~/Images/avatar.png" width="40";height="40" class="rounded-circle"/>
-
+                        <div type="button" class="btn btn-outline-none" data-toggle="modal" data-target="#exampleModalCenter" style="color:white;">
+                            <img src="~/Images/avatar.png" width="40" ;height="40" title="@FirstName" class="rounded-circle" />
+                            <span class="font-italic font-weight-bold pl-1">@FirstName!</span>
                         </div>
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
+                                <div class="modal-content" style="border-radius:10px; border:1px inset black;">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Signed in as <span>@User.Identity.Name</span></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        <h5 class="modal-title font-italic font-weight-bold" id="exampleModalLongTitle"><span>@FirstName</span></h5>
                                     </div>
                                     <div class="modal-body">
-                                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Edit Profile</a>
-                                        @if (User.IsInRole("User")) { 
-                                        <a class="nav-link text-dark" asp-controller="Users" asp-action="CheckoutBooks" title="Manage">My books</a>
+                                        <a class="btn btn-toolbar text-dark font-weight-bold" asp-area="Identity" asp-page="/Account/Manage/Index" title="My Profile">Edit Profile</a>
+                                        @if (User.IsInRole("User"))
+                                        {
+                                            <a class="btn btn-toolbar text-dark font-weight-bold" asp-controller="Users" asp-action="CheckoutBooks" title="Favorites">My books</a>
                                         }
                                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
-                                            <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                            <button type="submit" class="btn btn-toolbar text-dark font-weight-bold">Logout</button>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                                        
+                                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                 </ul>
             </div>
         </li>
