@@ -103,17 +103,24 @@ body {
     background-repeat:no-repeat;
 
 }
+.backgroundImage2 {
+    background-image: url("../Images/book.JPG");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 
 .tales {
    
-    width: 100%;
-    height: auto;
+    width: 70%;
+    height: 80%;
 }
 
 .carousel-item {
    
     
 }
+
     
 
 
