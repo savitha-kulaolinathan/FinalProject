@@ -4,14 +4,14 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<body class="backgroundImage">
-
-
-    <h2 class="text-info text-md-left font-weight-bold pb-4">Add new Book</h2>
-    <div class="text-md-center" style="margin-left:420px;">
-        <a asp-area="" asp-controller="Categories" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp;Add Category</a>
+<body class="backgroundImage">    
+    <div class="container d-inline-flex justify-content-between w-75">
+        <h2 class="text-md-left font-weight-bold" style="color: #2E4756E6">Add book by category</h2>
+        <div class="text-md-right" style="padding-left:235px">
+            <a asp-area="" asp-controller="Categories" asp-action="Create" class="btn text-white font-weight-bold" style=" background-color: #2E4756E6"><i class="fas fa-plus"></i> &nbsp;Add Category</a>
+        </div>
     </div>
-
+   
     <div class="container p-md-5 w-75 form-group row"
          style="margin-right:60px;
          margin-top:20px; border:2px solid black;
@@ -27,8 +27,8 @@
             <button id="search" class="btn btn-primary">Search</button>
         </div>
     </div>
-   
-    <div class="spinner-border"  id="Status"  style="display:none" role="status">
+
+    <div class="spinner-border" id="Status" style="display:none" role="status">
         <span class="sr-only"> Loading ....</span>
     </div>
     <div id="SearchResults">

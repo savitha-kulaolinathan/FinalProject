@@ -24,7 +24,7 @@ a {
   border-color: #1861ac;
 }
 .nav-link:hover {
-    background-color: #FF0000;
+    background-color:orangered;
     
 }
     /* Sticky footer styles
@@ -88,8 +88,7 @@ body {
     
 }
 
-.backgroundWhite {
-   
+.backgroundWhite {   
     width: 850px;
     padding: 60px;   
     border-radius: 10px;
