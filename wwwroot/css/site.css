@@ -69,9 +69,10 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    min-height: 100%;
+    }
 .footer {
   position: absolute;
   bottom: 0;
@@ -98,12 +99,23 @@ body {
     margin-left: 80px;
 }
 .backgroundImage {
-    background-image: url("../Images/background.png");
+    background-image: url("../Images/back.png");
     background-size: cover;
     background-repeat:no-repeat;
 
 }
 
+.tales {
+   
+    width: 100%;
+    height: auto;
+}
+
+.carousel-item {
+   
+    
+}
+    
 
 
 
