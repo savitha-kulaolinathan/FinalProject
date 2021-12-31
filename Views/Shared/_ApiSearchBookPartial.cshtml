@@ -1,17 +1,24 @@
 ﻿@model FinalProject.Models.ViewModels.ApiSearchResultViewModel
 
-<div class="border border-info rounded shadow w-75" style="margin-bottom:5px; margin-top:10px; padding-right:5px">
+<div class="border border-info rounded shadow w-75" style="margin-bottom:5px; margin-top:10px; padding-right:5px;background-color:white">
     <div class="container d-inline-flex justify-content-between align-content-center">
-        <div class="d-block">
+
+        <div class="col-4">
             <img src="@Model.image" />
         </div>
-        <div class="d-md-block">
+        <div class="col-8">
             <div class="mt-5">
-                <h4 class="text-black">@Model.title</h4>
-                <h6 class="text-black font-italic mt-5">@Model.subtitle</h6>
+                <h4 class="text-black pl-3 mt-5" >@Model.title</h4>
+                <h6 class="text-black font-italic mt-5 pl-3">
+                    @Model.subtitle
+                </h6>
             </div>
-            <div class="col-md-2 col-sm-11 offset-md-8 text-center mt-5">
-                <button onclick="CreateBook('@Model.isbn13', '@Model.CategoryId')" class="btn btn-primary text-md-right">Create</button>
+            <br />          
+                        <div class="container d-inline-flex justify-content-md-start align-content-center mt-5">
+                <button class="btn btn-secondary mr-4">
+                    <a href="@Model.url" class="text-white px-2">More info</a>
+                </button>
+                <button onclick="CreateBook('@Model.isbn13', '@Model.CategoryId')" class="btn btn-primary text-md-right px-5">Add</button>
             </div>
         </div>
     </div>

@@ -3,10 +3,10 @@
 <div class="container p-md-3">
     <div class="row pt-md-4">
         <div class="col-md-6 col-sm-8">
-            <h2 class="font-weight-bold" style="color:darkslateblue">List of Books</h2>
+            <h1 class="font-weight-bold" style="color:#2E4756E6">List of Books</h1>
         </div>
         <div class="col-md-6 col-sm-8 text-right">
-            <a asp-area="" asp-controller="Books" asp-action="Create" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp;Add book</a>
+            <a asp-area="" asp-controller="Books" asp-action="Create" class="btn text-white font-weight-bold" style="background-color: #2E4756E6; font-size: 20px"><i class="fas fa-plus"></i> &nbsp;Add book</a>
         </div>
     </div>
 
@@ -15,14 +15,14 @@
     @if (Model.Count() > 0)
     {
 
-        <table class="table table-bordered table-hover text-black table-striped shadow-lg p-3 mb-5 bg-body rounded font-weight-bold" style="width:100%;">
+        <table class="table table-bordered table-hover text-white table-striped shadow-lg p-3 mb-5 bg-body rounded font-weight-bold" style="width:100%; background-color:#33658A; font-size:20px">
             <thead>
                 <tr class="text-center">
                     <th>
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Subtitle)
+                        @Html.DisplayNameFor(model => model.Authors)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Status)
@@ -41,7 +41,7 @@
                 {
                     <tr>
                         <td class="col-md-3 col-sm-2 align-middle">@item.Title</td>
-                        <td class="col-md-5 col-sm-2 align-middle">@item.Subtitle</td>
+                        <td class="col-md-5 col-sm-2 align-middle">@item.Authors</td>
                         <td class="col-md-1 col-sm-2 align-middle">
                             @Enum.Parse(typeof(Book.EStatus), item.Status)
                         </td>
@@ -49,7 +49,7 @@
                         <td class="col-md-2 text-center align-middle">
                             @Html.DisplayFor(modelItem => item.Category.Name)
                         </td>
-                        <partial name="_TableButtonPartialView" class="col-md-1" model="item.Id" />                       
+                        <partial name="_TableButtonPartialView" class="col-md-1 text-center" model="item.Id" />                       
                     </tr>
 }
             </tbody>

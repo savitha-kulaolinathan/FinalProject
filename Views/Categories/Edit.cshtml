@@ -7,14 +7,14 @@
 <body class="backgroundImage">
 
     <h2 class="text-md-left font-weight-bold" style="color:darkslateblue; margin-left:220px;">Edit</h2>
-    <div class="container jumbotron justify-content-center bg-white mt-5" style="width:60%; border:1px solid black;">
+    <div class="container jumbotron justify-content-center  bg-white mt-5" style="width:60%; border:1px solid black;">
 
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group row">
                 <div class="col-3 ml-5">
-                    <label asp-for="Name" class="control-label"></label>
+                    <label asp-for="Name" class="control-label text-black font-weight-bold"></label>
                 </div>
                 <div class="col-7">
                     <input asp-for="Name" class="form-control" />

@@ -11,32 +11,30 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
 
 </head>
-<body>
+<body class="backgroundImage">
     <header>
 
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" style="background-color:black;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" style="background-color:#00529B;">
             <button class="navbar-toggler bg-white text-black-50" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse  d-sm-inline-flex flex-sm-row">
-                <div class="nav-item">
-                    @*<img src="/Images/white_library_logo.png" width="140" height="80" />*@
-                </div>
+                
                 <ul class="navbar-nav flex-md-grow-1">
                     @if (User.IsInRole("Admin"))
                     {
                         <li class="nav-item">
-                            <a class="navbar-brand text-white font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">IT Library</a>
+                            <a class="navbar-brand text-white font-weight-bold"  style="font-size:40px;font-family:'Agency FB'" asp-area="" asp-controller="Home" asp-action="Index">IT Library</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-white font-weight-bold" asp-area="" asp-controller="Books" title="Catalog" asp-action="Index"><i class="fas fa-book-open fa-2x"></i></a>
-                            <p class="text-white font-weight-bold">Catalog</p>
+                            <a class="nav-link text-white font-weight-bold" style="font-size:25px" asp-area="" asp-controller="Books" title="Catalog" asp-action="Index"><i class="fas fa-book-open fa-2x"></i></a>
+                         
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white font-weight-bold" asp-area="" asp-controller="Categories" asp-action="Index">Category</a>
+                            <a class="nav-link text-white font-weight-bold"  style="font-size:30px" asp-area="" asp-controller="Categories" asp-action="Index">Category</a>
 
                         </li>
                     }
@@ -44,11 +42,11 @@
                     {
 
                         <li class="nav-item">
-                            <a class="navbar-brand text-white font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">IT Library</a>
+                            <a class="navbar-brand text-white"style="font-size:40px;font-family:'Agency FB'" asp-area="" asp-controller="Home" asp-action="Index">IT Library</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white font-weight-bold" asp-area="" asp-controller="Books" asp-action="Index"><i class="fas fa-book-open fa-2x"></i></a>
-                            <p class="text-white font-weight-bold">Catalog</p>
+                            <a class="nav-link text-white font-weight-bold" style="font-size:25px" asp-area="" asp-controller="Books" asp-action="Index"><i class="fas fa-book-open fa-2x"></i></a>
+                           
                         </li>
                     }
 
@@ -74,11 +72,13 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted bg-light">
-        <div class="container">
-            &copy; 2021 - FinalProject
+    <footer class="border-top footer" style="background-color: #00529B">
+        <div class="text-white ml-5" >
+            &copy; 2021 - IT Library
         </div>
-
+       
+        
+        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

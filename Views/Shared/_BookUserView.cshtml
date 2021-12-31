@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<FinalProject.Models.Book>
 
-<h1 class="text-success"> List of Books</h1>
+<h1 class="text-black ml-4"> List of Books</h1>
 <style>
     .flip-card {
         background-color: transparent;
@@ -34,14 +34,14 @@
     }
 
     .flip-card-front {
-        padding-top: 18px;
+        /*padding: 10px;*/
         background-color: rgb(255 255 255 / 0.90);
         color: black;
     }
 
     .flip-card-back {
         padding-top:40px;
-        background-color: rgb(170 206 155 / 0.90);
+        background-color:#F7931D;
         /* color: white;*/
         color: black;
         transform: rotateY(180deg);
@@ -54,23 +54,33 @@
         <div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img src="@item.Image" alt="Avatar"/>
+                    <img src="@item.Image" alt="Avatar" height="370" weight="360"/>
                 </div>
                 <div class="flip-card-back">
                     <h4>@Html.DisplayFor(modelItem => item.Title)</h4>
                     <p>@Html.DisplayFor(modelItem => item.Subtitle)</p>
-                    <p class="card-text">
-                        @if (User.Identity.IsAuthenticated)
-
-                        {
-                            <input type="button" id="checkout" class="btn btn-primary text-white"
-                                   onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
-                        }
                     <p> @Html.DisplayFor(modelItem => item.Category.Name)</p>
-                    <a class="btn btn-success text-white px-4" asp-action="Details" asp-route-Id="@item.Id">
-                        <i class="fas fa-list-alt fa-3x" style="font-size:40px"></i>
-                    </a>
+                    @if (User.Identity.IsAuthenticated)
 
+                    {
+                        <input type="button" id="checkout" class="btn btn-primary text-white"
+                               onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary">
+                            <a asp-area="Identity" asp-page="/Account/Login" class=" btn btn-primary text-white rounded">Ready to CheckOut</a>
+                        </button>
+
+
+                    }
+                    <p class="card-text pt-5">
+                        <a class="btn btn-success text-white px-4" asp-action="Details" asp-route-Id="@item.Id">
+                            <i class="fas fa-list-alt fa-2x" style="font-size:23px"></i>
+                        </a>
+                        <button class="btn btn-secondary">
+                            <a href="@item.MoreInfoUrl" class="text-white">More info</a>
+                        </button>                    
                 </div>
             </div>
         </div>
