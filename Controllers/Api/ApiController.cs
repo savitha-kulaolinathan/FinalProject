@@ -81,7 +81,7 @@ namespace FinalProject.Controllers.Api
             var streamTask = _client.GetStreamAsync(SD.GetByISBNPath + isbn);
             var result = await JsonSerializer.DeserializeAsync<ApiSearchResultViewModel>(await streamTask);
 
-            return result; 
+            return result;
 
         }
     }

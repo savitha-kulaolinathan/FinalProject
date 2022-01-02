@@ -34,15 +34,9 @@
             type: 'GET',
             success: function (response) {
                 
-                bootbox.confirm({
+                bootbox.alert({
                     message: response,
-                    buttons: {
-                        confirm: {
-                            label: 'Refresh',
-                            className: 'btn-success'
-                        }
-                    },
-                    callback: function (result) {
+                    callback: function () {
                         window.location.href = indexUrl;
                     }
                 });

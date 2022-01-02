@@ -6,38 +6,87 @@
 }
 <body class="backgroundImage">
 
-    <h1>@Model.SearchKeyword</h1>
-    @foreach (var item in Model.Books)
+    <h1 class="ml-3">@Model.SearchKeyword.Substring(0, 1).ToUpper()@Model.SearchKeyword.Substring(1).ToLower()</h1>
+    @if (@Model.Books.Count() > 0)
     {
-        <div class="card d-md-inline-flex m-md-3 p-md-2" style="width: 20rem; height:38rem;">
-            <img  class="card-img-top " src="@item.Image"/>
-            <div class="card-body">
-                <h5 class="card-title text-center">
-                    @Html.DisplayFor(modelItem => item.Title)
-                </h5>
-                <h6 class="card-subtitle font-italic">
-                    @Html.DisplayFor(modelItem => item.Subtitle)
-                </h6>
-                <p class="card-text text-center font-weight-bold">
-                    @Html.DisplayFor(modelItem => item.Category.Name)
-                </p>
-                <div class="d-flex justify-content-md-between align-items-center m-md-2">
-                    @if (User.Identity.IsAuthenticated)
+        @foreach (var item in Model.Books)
+        {
+            <div class="card d-md-inline-flex m-md-3 p-md-2" style="width: 20rem; height:38rem;">
+                <img class="card-img-top " src="@item.Image" />
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </h5>
+                    <h6 class="card-subtitle font-italic">
+                        @Html.DisplayFor(modelItem => item.Subtitle)
+                    </h6>
+                    <p class="card-text text-center font-weight-bold">
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </p>
+                    <div class="d-flex justify-content-md-between align-items-center m-md-2">
+                        @if (User.IsInRole("User"))
 
-                    {
-                        <button class="card-text text-md-center  text-white font-weight-bolder btn btn-primary m-md-1">
-                @Enum.Parse(typeof(Book.EStatus), item.Status)
-            </button>
-                    }
-                        <button class="card-text text-white text-md-center font-weight-bolder btn btn-secondary m-md-1">
-                            <a href="@item.MoreInfoUrl" class="text-white">More info</a>
-                        </button>
+                        {
+
+                            <input type="button" id="checkout" class="btn btn-primary text-white"
+                                   onclick=checkOut("@item.Id") value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+
+                        }
+                        else if (User.IsInRole("Admin"))
+                        {
+                            <input type="button" id="checkout" class="btn btn-primary text-white"
+                                   value="@Enum.Parse(typeof(Book.EStatus), item.Status)" />
+
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Account/Login" class=" btn btn-primary text-white rounded">Ready to CheckOut</a>
+
+                        }
+                        <a href="@item.MoreInfoUrl" class="card-text text-white text-md-center font-weight-bolder btn btn-secondary m-md-1 text-white" target="_blank">More info</a>
                     </div>
+                </div>
             </div>
-        </div>
+        }
+
+
+
     }
-   
+    else
+    {
+        <p class="m-4">No books available in this keyword</p>
+    }
+
 </body>
+@section Scripts{
+
+    <script type="text/javascript">
+    function checkOut(id) {
+        var checkInurl = '@Url.Action("CheckIn", "Users")';
+        var indexUrl = '@Url.Action("Index", "Books")';
+        checkInurl = checkInurl + '/?id=' + id;
+        $.ajax({
+            url: checkInurl,
+            type: 'GET',
+            success: function (response) {
+
+                bootbox.alert({
+                    message: response,
+                    callback: function () {
+                        window.location.href = indexUrl;
+                    }
+                });
+
+            },
+            error: function () {
+
+            }
+        })
+    }
+
+    </script>
+}
+
 
 
 
