@@ -8,9 +8,9 @@
 <body class="backgroundImage">
     <h1 class="text-left"> Book Details</h1>
     <div class="container-fluid mt-md-5 d-flex justify-content-md-center  bg-white shadow align-content-center" style="border:2px black solid;">
-       
+
         <div class="col-md-5"><img src="@Model.Image" height="500" weight="700" /></div>
-     
+
         <div class="col-md-7 p-md-4">
 
 
@@ -24,27 +24,16 @@
                 <h6 class="p-md-3"><span class="font-weight-bold"> Description: </span>@Html.DisplayFor(model => model.Description)</h6>
 
                 <div class="container p-md-3">
-                    <button class="btn btn-success">
-                        <a asp-action="Index" class="text-white">Back to List</a>
-                    </button>
-                    <button class="btn btn-primary">
-                        <a href="@Model.MoreInfoUrl" class="text-white">More info</a>
-                    </button>
-
-
+                    <a asp-action="Index" class="btn btn-success text-white">Back to List</a>
+                    <a href="@Model.MoreInfoUrl" target="_blank" class="btn btn-secondary text-white">More info</a>
                 </div>
             </div>
-
-
-
             @if (User.IsInRole("Admin"))
             {
                 <div class="form-group">
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                    </div>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                </div>
             }
-
         </div>
     </div>
-    
 </body>

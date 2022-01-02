@@ -7,12 +7,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Data;
 using FinalProject.Models;
+using FinalProject.Models.ViewModels;
 
 namespace FinalProject.Controllers
 {
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        [TempData]
+        public string StatusMessage { get; set; }
 
         public CategoriesController(ApplicationDbContext context)
         {
@@ -46,23 +50,43 @@ namespace FinalProject.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
-            return View();
+            CategoryViewModel viewModel = new CategoryViewModel()
+            {
+                StatusMessage = StatusMessage,
+                Category = new Category()
+            }; 
+            
+            return View(viewModel);
         }
 
         // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
+            
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var doescategoryExists = await _context.Categories.Where(c => c.Name == category.Name).ToListAsync();
+                if (doescategoryExists.Count() > 0)
+                {
+                    //Error
+                    StatusMessage = "Error : Category " + doescategoryExists.First().Name + " already added in the book catalog. Please use another name.";
+                   
+                }
+                else
+                {
+                    _context.Add(category);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            return View(category);
+            CategoryViewModel viewModel = new CategoryViewModel()
+            {
+                StatusMessage = StatusMessage,
+                Category = category
+            };
+            return View(viewModel);
         }
 
         // GET: Categories/Edit/5
@@ -82,8 +106,6 @@ namespace FinalProject.Controllers
         }
 
         // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
